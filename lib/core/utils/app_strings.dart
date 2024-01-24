@@ -1,0 +1,58 @@
+import 'package:let_s_have_fun/core/app_export.dart';
+
+class AppStrings {
+  static String appTitle = "نمرح معا".tr;
+  static String exercise = "التمارين".tr;
+  static String exerciseManagement = "إدارة التمارين".tr;
+   static String addExercise = "اضافة تمرين".tr;
+   static String addlevel = "اضافة مستوى".tr;
+  static String title = "العنوان".tr;
+  static String levels = "المستويات".tr;
+  static String level = "المستوى".tr;
+  static String levelsManagement = "إدارة المستويات".tr;
+  static String add = "اضافة".tr;
+  static String cancel = "الغاء".tr;
+  static String levelScore = "نقاط المستوى".tr;
+  static String points = "نقاط".tr;
+  static String chooseColor = "اختر اللون".tr;
+  static String delete = "حذف".tr;
+  static String deleteExercise = "حذف التمرين".tr;
+  static String deleteLevel = "حذف المستوى".tr;
+  static String gamesManagement = "إدارة الالعاب".tr;
+  static String userManagement = "إدارة المستخدمين".tr;
+  static String doctorsManagement = "إدارة الاطباء".tr;
+  static String perview = "عرض".tr;
+  static String question = "السؤال".tr;
+  static String imgUrl = "الصورة".tr;
+  static String enterSuccessMessage = "رسالة الاجابه الصحيح".tr;
+  static String reqStar = "*".tr;
+  static String saveGame = "حفظ العبة".tr;
+  static String answers = "الاجابات".tr;
+  static const String name = 'الأسم: ';
+  static const String email = 'البريد الالكتروني: ';
+  static const String phone = 'الهاتف: ';
+  static const String address = 'العنوان: ';
+  static const String age = 'العمر: ';
+   static const String score = 'النقاط: ';
+  static const String regameCount = 'عدد المحاولات: ';
+  static const String gameTime = 'وقت العب: ';
+  static const String blockUser = 'حظر المستخدم';
+  static const String hospital = 'المستشفي: ';
+  static const String profession = 'المهنة: ';
+  static const String photo = 'الصورة: ';
+  static const String nationality = 'الجنسية: ';
+  static const String yearsOfExperience = 'سنوات الخبرة: ';
+  static const String password = 'كلمة المرور';
+  static const String confirmPassword = 'تأكيد كلمة المرور';
+  static const String addDoctor = 'اضافة طبيب';
+  static const String cantEmpty = 'لا يمكن ترك الحقل فارغ';
+  static const String showAllDoctors = 'اظهار جميع الاطباء';
+  static const String loading = 'جاري التحميل';
+  static const String retryAgain = 'أعد المحاولة';
+  static const String yes = 'نعم';
+  static const String no = 'لا';
+  static const String success = 'تمت العملية بنجاح';
+  static const String successDeleted = 'تم حذف العنصر بنجاح';
+  static const String chooseLevel = 'اختر التمرين والمستوي';
+
+}
