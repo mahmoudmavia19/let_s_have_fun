@@ -66,13 +66,13 @@ class DoctorListItem extends StatelessWidget {
         onTap: () {
           Get.dialog(DoctorDetailsDialog(doctor: doctor));
         },
-        title: Text(doctor.name, style: TextStyle(color: ColorConstant.primary, fontSize: 20.0)),
+        title: Text(doctor.name??'', style: TextStyle(color: ColorConstant.primary, fontSize: 20.0)),
         subtitle: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(doctor.email),
-            Text(doctor.profession),
+            Text(doctor.email??''),
+            Text(doctor.profession??''),
           ],
         ),
         leading: CircleAvatar(

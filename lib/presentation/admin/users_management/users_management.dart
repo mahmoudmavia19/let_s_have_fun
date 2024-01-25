@@ -18,7 +18,7 @@ class UsersManagementScreen extends GetWidget<UsersController> {
       level: 3,
       score: 150,
       regameCount: 7,
-      gameTime: DateTime.now(),
+      gameTime: Duration(hours: 2, minutes: 30),
       image: "https://example.com/ahmed.jpg",
     ),
     User(
@@ -30,7 +30,7 @@ class UsersManagementScreen extends GetWidget<UsersController> {
       level: 2,
       score: 120,
       regameCount: 5,
-      gameTime: DateTime.now(),
+      gameTime: Duration(hours: 2, minutes: 30),
       image: "https://example.com/fatma.jpg",
     ),
     // Add more users with Arabic data as needed

@@ -54,5 +54,24 @@ class AppStrings {
   static const String success = 'تمت العملية بنجاح';
   static const String successDeleted = 'تم حذف العنصر بنجاح';
   static const String chooseLevel = 'اختر التمرين والمستوي';
+  static const String editProfile = 'الملف الشخصى';
+  static const String addChild = 'اضافة طفل';
+  static const String childrenRecords = 'سجل الاطفال';
+  static const String saveChanges = 'حفظ التغييرات';
+  static const String doctor = 'طبيب';
+  static const String showAllChildren = 'اظهار جميع الاطفال';
+  static const String childernRecordsTitle = 'سجل الاطفال';
+  static const String noChildrenAvailable = 'لا يوجد اطفال متاحين';
+  static const String edit  = 'تعديل';
+  static const String close =   'اغلاق';
 
+  static const String playHistoryTitle = 'سجل لعب';
+  static const String addCommentsTitle = 'اضافة تعليق ل';
+
+  static String playHistoryForChild(String childName) => '$playHistoryTitle $childName';
+  static String addCommentsForChild(String childName) => '$addCommentsTitle$childName';
+
+  static const String enterComments = 'أدخل التعليقات';
+  static const String enterCommentsHint = 'أدخل التعليقات';
+  static const String saveComments = 'حفظ التعليقات';
 }

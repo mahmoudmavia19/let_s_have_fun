@@ -7,7 +7,7 @@ class User {
   int level;
   int score;
   int regameCount;
-  DateTime gameTime;
+  Duration gameTime;
   String image;
 
   User({
