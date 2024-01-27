@@ -53,6 +53,8 @@ class AppStrings {
   static const String no = 'لا';
   static const String success = 'تمت العملية بنجاح';
   static const String successDeleted = 'تم حذف العنصر بنجاح';
-  static const String chooseLevel = 'اختر التمرين والمستوي';
+  static const String chooseLevelOrEx = 'اختر التمرين والمستوي';
+  static const String chooseLevel = 'اختر المستوي';
+  static const String logout = 'تسجيل الخروج';
 
 }

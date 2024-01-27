@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/constant/constant.dart';
-import 'package:let_s_have_fun/core/utils/color_constant.dart';
 import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 import 'package:let_s_have_fun/presentation/admin/exercies_management/controller/exercise_controller.dart';
 import 'package:let_s_have_fun/presentation/admin/games_management/controller/games_controller.dart';
-import 'package:let_s_have_fun/presentation/play_area.dart';
 import 'package:let_s_have_fun/widgets/required_text.dart';
 import '../../../core/app_export.dart';
 import '../../../core/utils/app_strings.dart';
@@ -23,15 +21,15 @@ class GamesManagement extends GetWidget<GameController> {
                     backgroundColor:exerciseController.exercises[index].color,
                     collapsedBackgroundColor:exerciseController.exercises[index].color,
                     title:Text(exerciseController.exercises[index].title,
-                      style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
                     leading: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
-                            onPressed: () {
+                        InkWell(
+                            onTap: () {
                               exerciseController.showAddLevelDialog(exerciseController.exercises[index]);
                             },
-                            icon: Icon(Icons.add)),
+                            child: Image.asset('assets/images/level_icon.png',width: 23,)),
 
                         IconButton(
                             onPressed: () {
@@ -98,18 +96,26 @@ class GamesManagement extends GetWidget<GameController> {
          ),
         ),
         body: controller.state.value.getScreenWidget(_widget(), (){}),
-        floatingActionButton: Visibility(
-          visible: controller.currentLevel.value != null,
-          child: FloatingActionButton(
-            onPressed: (){
-             // Get.to(PlayArea(controller.color!));
-              Get.toNamed(AppRoutes.perViewAdmin,arguments: [
-                controller.currentLevel.value,
-                controller.color
-              ]);
-            },
-            child: Icon(Icons.slideshow_sharp),
-          ),
+        floatingActionButton: controller.currentLevel.value == null ?
+        Builder(
+          builder: (innerContext) {
+            return FloatingActionButton(
+              onPressed: (){
+                // Get.to(PlayArea(controller.color!));
+                Scaffold.of(innerContext).openEndDrawer();
+              },
+              child:Text(AppStrings.chooseLevel,textAlign: TextAlign.center,),
+            );
+          }
+        ):  FloatingActionButton(
+          onPressed: (){
+           // Get.to(PlayArea(controller.color!));
+            Get.toNamed(AppRoutes.perViewAdmin,arguments: [
+              controller.currentLevel.value,
+              controller.color
+            ]);
+          },
+          child: Icon(Icons.slideshow_sharp),
         ),
       ),
     );
