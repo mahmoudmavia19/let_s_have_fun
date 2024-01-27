@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'ar_ar/en_us_translations.dart';
+import 'ar_ar/ar_ar_translations.dart';
 import 'en_us/en_us_translations.dart';
 
 class AppLocalization extends Translations {

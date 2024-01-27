@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
         title: 'let_s_have_fun',
         initialBinding: InitialBindings(),
          getPages: AppRoutes.pages,
-        initialRoute:AppRoutes.editDoctorsProfile ,
+        initialRoute:AppRoutes.initialRoute ,
      //  home: PlayArea(ColorConstant.appColor[0]),
       );
     });
