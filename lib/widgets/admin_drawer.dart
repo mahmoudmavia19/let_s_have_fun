@@ -34,6 +34,7 @@ class AdminDrawer extends StatelessWidget {
               _tab(AppStrings.doctorsManagement,(){
                 Get.toNamed(AppRoutes.doctorsManagementAdmin);
               }),
+              _tab(AppStrings.logout,(){}),
 
             ]
         ),

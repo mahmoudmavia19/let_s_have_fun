@@ -67,6 +67,9 @@ class AppStrings {
 
   static const String playHistoryTitle = 'سجل لعب';
   static const String addCommentsTitle = 'اضافة تعليق ل';
+  static const String chooseLevelOrEx = 'اختر التمرين والمستوي';
+  static const String chooseLevel = 'اختر المستوي';
+  static const String logout = 'تسجيل الخروج';
 
   static String playHistoryForChild(String childName) => '$playHistoryTitle $childName';
   static String addCommentsForChild(String childName) => '$addCommentsTitle$childName';
