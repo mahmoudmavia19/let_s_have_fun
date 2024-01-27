@@ -26,6 +26,7 @@ class AppStrings {
   static String imgUrl = "الصورة".tr;
   static String enterSuccessMessage = "رسالة الاجابه الصحيح".tr;
   static String reqStar = "*".tr;
+  static String sections = "الاقسام".tr;
   static String saveGame = "حفظ العبة".tr;
   static String answers = "الاجابات".tr;
   static const String name = 'الأسم: ';

@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:let_s_have_fun/core/constant/constant.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
+import 'package:let_s_have_fun/presentation/player/games/game_screen.dart';
 import 'core/app_export.dart';
 
 void main() {
@@ -54,8 +56,8 @@ class MyApp extends StatelessWidget {
         title: 'let_s_have_fun',
         initialBinding: InitialBindings(),
          getPages: AppRoutes.pages,
-        initialRoute:AppRoutes.initialRoute ,
-     //  home: PlayArea(ColorConstant.appColor[0]),
+        initialRoute:AppRoutes.splashScreen ,
+      //  home:GameScreen(color:exercises.last.color!,level:exercises.last.levels!.last),
       );
     });
   }

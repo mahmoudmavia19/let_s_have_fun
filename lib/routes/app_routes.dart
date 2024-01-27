@@ -6,6 +6,8 @@ import 'package:let_s_have_fun/presentation/doctor/child_play_history/add_commen
 import 'package:let_s_have_fun/presentation/doctor/child_play_history/binding/play_history_binding.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_play_history/view_user_list.dart';
 import 'package:let_s_have_fun/presentation/doctor/edit_profile/edit_profile.dart';
+import 'package:let_s_have_fun/presentation/player/games/binding/game_binding.dart';
+import 'package:let_s_have_fun/presentation/player/games/game_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/splash_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:get/get.dart';
@@ -22,6 +24,10 @@ import '../presentation/admin/users_management/binding/users_binding.dart';
 import '../presentation/admin/users_management/users_management.dart';
 import '../presentation/doctor/child_play_history/binding/commets_binding.dart';
 import '../presentation/doctor/child_play_history/child_play_history_screen.dart';
+import '../presentation/player/exercises/binding/exercises_binding.dart';
+import '../presentation/player/exercises/exercises_screen.dart';
+import '../presentation/player/levels/binding/levels_binding.dart';
+import '../presentation/player/levels/levels_screen.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
@@ -40,6 +46,12 @@ class AppRoutes {
   static const String playHistoryScreen = '/doctor/play_history_screen';
   static const String commentsScreen = '/doctor/comments_screen';
   static const String viewUserList = '/doctor/view_user_list';
+  // player routes
+  static const String exercisesScreen = '/player/exercises_screen';
+  static const String levelsScreen = '/player/levels_screen';
+  static const String gameScreen = '/player/game_screen';
+
+
 
 
 
@@ -122,6 +134,21 @@ class AppRoutes {
       page: () => ShowChildrenList(),
       binding:ChildBinding(),
     ),
+    GetPage (
+      name: exercisesScreen,
+      page: () => ExercisesScreen(),
+      binding: ExercisesBinding(),
+    ),
+    GetPage (
+      name: levelsScreen,
+      page: () => LevelsScreen(Get.arguments[0]),
+      binding: LevelsBinding(),
+    ),
+   /* GetPage (
+      name: gameScreen,
+      page: () => GameScreen(),
+      binding: GameBinding(),
+    ),*/
 
   ];
 }

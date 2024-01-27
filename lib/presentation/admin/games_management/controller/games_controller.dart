@@ -85,7 +85,7 @@ class GameController extends GetxController {
         img: imgController.text ,
     );
 
-    currentLevel.value?.game = game;
+    currentLevel.value?.games?.add(game);
    }
 
 

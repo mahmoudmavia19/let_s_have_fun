@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
 
+import 'level.dart';
+
 class Exercise {
   int id;
   String title;
-  List<String>? levels;
+  List<Level>? levels;
   Color? color;
 
   Exercise({
