@@ -144,11 +144,11 @@ class AppRoutes {
       page: () => LevelsScreen(Get.arguments[0]),
       binding: LevelsBinding(),
     ),
-   /* GetPage (
+    GetPage (
       name: gameScreen,
-      page: () => GameScreen(),
+      page: () => GameScreen(level: Get.arguments[0] , color: Get.arguments[1]),
       binding: GameBinding(),
-    ),*/
+    ),
 
   ];
 }

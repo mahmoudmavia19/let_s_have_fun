@@ -2,18 +2,19 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
+import 'package:let_s_have_fun/presentation/admin/exercies_management/model/Exercise.dart';
 
 import '../core/utils/image_constant.dart';
 
 class ExercisesItem extends StatelessWidget {
-  String title;
+  Exercise exercise;
 
-  ExercisesItem(this.title);
+  ExercisesItem(this.exercise);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-
+        Get.toNamed(AppRoutes.levelsScreen,arguments: [exercise]);
       },
       child: Container(
         height: 160,
@@ -44,7 +45,7 @@ class ExercisesItem extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(title,style: TextStyle(
+                          Text(exercise.title,style: TextStyle(
                               fontSize: 24 ,
                               fontWeight: FontWeight.bold ,
                               color: Colors.red,

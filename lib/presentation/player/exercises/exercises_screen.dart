@@ -46,7 +46,7 @@ class ExercisesScreen extends StatelessWidget {
                       child: ListView.builder(
                         itemCount:exercises.length ,
                           itemBuilder:(context, index) => index%2==0?ExercisesItem2(exercises[index]):
-                          ExercisesItem(exercises[index].title), )
+                          ExercisesItem(exercises[index]), )
                     )
                   ],
                 ),

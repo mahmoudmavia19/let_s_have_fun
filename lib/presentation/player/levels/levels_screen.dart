@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:let_s_have_fun/core/constant/constant.dart';
-import 'package:let_s_have_fun/core/utils/color_constant.dart';
-import 'package:let_s_have_fun/presentation/admin/exercies_management/model/level.dart';
 import 'package:let_s_have_fun/presentation/play_area.dart';
-import 'package:let_s_have_fun/widgets/exercises_item.dart';
 import 'package:let_s_have_fun/widgets/level_item.dart';
-
-import '../../../core/utils/app_strings.dart';
-import '../../../core/utils/image_constant.dart';
-import '../../../widgets/exercises_item2.dart';
-import '../../../widgets/message_card.dart';
 import '../../admin/exercies_management/model/Exercise.dart';
 
 class LevelsScreen extends StatelessWidget {
@@ -52,8 +43,8 @@ class LevelsScreen extends StatelessWidget {
                           itemBuilder: (itemContext , index){
                             return
                             index%2==0 ?
-                              LevelItem(exercise.levels![index]) :
-                             LevelItem2(AppStrings.level+" " + convertToArabicWords((index+1).toString())!);
+                              LevelItem(exercise.levels![index],exercise.color!) :
+                             LevelItem2(exercise.levels![index],exercise.color!);
                       })
                     )
                   ],

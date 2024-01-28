@@ -91,9 +91,16 @@ class GameScreen extends StatelessWidget {
                           //return Image.asset(level.game?.imgsAnswer?[index]??'');
                           return  InkWell(
                             onTap: () {
-                              Get.dialog(
-                                SuccessDialog(title:level.games?.first.successMessage??'',)
-                              );
+                              if(level.games!.first.currentIndex==index || level.games!.first.currentIndex2==index){
+                                Get.dialog(
+                                    SuccessDialog(title:level.games?.first.successMessage??'',)
+                                );
+                              }else {
+                                Get.dialog(
+                                    NotSuccessDialog(title:level.games?.first.successMessage??'',)
+                                );
+                              }
+
                             },
                             child: Container(
                               width: 97,

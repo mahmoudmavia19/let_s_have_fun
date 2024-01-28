@@ -75,4 +75,8 @@ class AppStrings {
   static const String enterComments = 'أدخل التعليقات';
   static const String enterCommentsHint = 'أدخل التعليقات';
   static const String saveComments = 'حفظ التعليقات';
+  static const String notSuccess = 'الاجابة غير صحيحة';
+  static const String nextLevel = 'المستوى التالى';
+  static const String replay = 'أعد المحاولة';
+
 }
