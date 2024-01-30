@@ -14,7 +14,7 @@ class GameController extends GetxController {
   TextEditingController imgController = TextEditingController();
   TextEditingController successMessageController = TextEditingController();
     Rx<Level?> currentLevel = Rx<Level?>(null);
-    Rx<FlowState>  state = Rx<FlowState>(ErrorState(StateRendererType.fullScreenErrorState, AppStrings.chooseLevel));
+    Rx<FlowState>  state = Rx<FlowState>(EmptyState(AppStrings.chooseLevelOrEx));
     Color? color ;
    getLevel(Level level){
     currentLevel.value= level;

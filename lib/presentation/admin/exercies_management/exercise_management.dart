@@ -23,7 +23,9 @@ class ExerciseScreen extends StatelessWidget {
         onPressed: () {
           exerciseController.showAddExerciseDialog();
         },
-        child: Icon(Icons.add),
+        child: Text(AppStrings.addExercise,style: TextStyle(fontSize: 14.0),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
@@ -44,12 +46,11 @@ class ExerciseScreen extends StatelessWidget {
                 leading: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
-                        onPressed: () {
-                          exerciseController.showAddLevelDialog(
-                              exerciseController.exercises[index]);
+                    InkWell(
+                        onTap: () {
+                          exerciseController.showAddLevelDialog(exerciseController.exercises[index]);
                         },
-                        icon: Icon(Icons.add)),
+                          child: Image.asset('assets/images/level_icon.png',width: 23,)),
                     IconButton(
                         onPressed: () {
                           showConfirmDialog(
@@ -131,4 +132,8 @@ class ExerciseScreen extends StatelessWidget {
           );
         });
   }
+
+
+
+
 }
