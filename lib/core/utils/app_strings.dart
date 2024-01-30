@@ -78,5 +78,14 @@ class AppStrings {
   static const String notSuccess = 'الاجابة غير صحيحة';
   static const String nextLevel = 'المستوى التالى';
   static const String replay = 'أعد المحاولة';
+  static const String register = 'تسجيل جديد';
+  static const String iHaveAccount = 'لدي حساب بالفعل';
+  static const String  iNotHaveAccount = 'ليس لدي حساب';
+  static const String  login = 'تسجيل الدخول';
+  static const String  admin = 'المشرف';
+  static const String  player = 'اللاعب';
+  static const String  theDoctor = 'الطبيب';
+  static const String  chooseUser = 'اختر المستخدم';
+
 
 }

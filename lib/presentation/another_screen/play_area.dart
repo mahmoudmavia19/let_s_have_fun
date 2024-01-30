@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../core/app_export.dart';
+import '../../core/app_export.dart';
 
 class PlayArea extends StatelessWidget {
   Color color ;

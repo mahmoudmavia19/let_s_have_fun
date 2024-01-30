@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
  import 'package:let_s_have_fun/core/app_export.dart';
 import 'package:let_s_have_fun/presentation/admin/exercies_management/model/level.dart';
-import 'package:let_s_have_fun/presentation/play_area.dart';
+import 'package:let_s_have_fun/presentation/another_screen/play_area.dart';
 import 'package:let_s_have_fun/widgets/message_card.dart';
 
 import '../../core/utils/app_strings.dart';
