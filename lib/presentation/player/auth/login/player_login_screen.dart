@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
 import 'package:let_s_have_fun/core/utils/app_strings.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
+import 'package:let_s_have_fun/presentation/player/auth/login/controller/player_login_controller.dart';
 import 'package:let_s_have_fun/widgets/auth_background.dart';
 
-class PlayerLoginScreen extends StatelessWidget {
+class PlayerLoginScreen extends GetWidget<PlayerLoginController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -13,34 +15,10 @@ class PlayerLoginScreen extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               AuthBackground(),
-              Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Text(AppStrings.login,style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white
-                      )),
+              Obx(()=>Center(
+                  child: controller.state.value.getScreenWidget(_content(), (){
 
-                      _buildTextField(AppStrings.email),
-                      _buildTextField(AppStrings.password),
-                       Container(
-                        padding: EdgeInsets.all(8.0),
-                        width:  double.maxFinite,
-                        child: ElevatedButton(onPressed: () {
-                          Get.toNamed(AppRoutes.exercisesScreen);
-                        }, child: Text(AppStrings.login),
-                            style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF1E9F9E),
-                                foregroundColor: Colors.white
-                            )),
-                      ),
-                      TextButton(onPressed: () {
-                        Get.toNamed(AppRoutes.playerRegisterScreen);
-                      }, child: Text(AppStrings.iNotHaveAccount))
-                    ],
-                  ),
+                  })
                 ),
               ),
               Align(
@@ -54,6 +32,38 @@ class PlayerLoginScreen extends StatelessWidget {
       ),
     );
   }
+
+  _content()=> SingleChildScrollView(
+    child: Form(
+      key: controller.formKey,
+      child: Column(
+        children: [
+          Text(AppStrings.login,style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.white
+          )),
+
+          _buildTextField(AppStrings.email, controller: controller.emailController),
+          _buildTextField(AppStrings.password, controller: controller.passwordController),
+          Container(
+            padding: EdgeInsets.all(8.0),
+            width:  double.maxFinite,
+            child: ElevatedButton(onPressed: () {
+             controller.login();
+            }, child: Text(AppStrings.login),
+                style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF1E9F9E),
+                    foregroundColor: Colors.white
+                )),
+          ),
+          TextButton(onPressed: () {
+            Get.toNamed(AppRoutes.playerRegisterScreen);
+          }, child: Text(AppStrings.iNotHaveAccount))
+        ],
+      ),
+    ),
+  );
 
   _buildTextField(String title , {TextEditingController? controller}) {
     return Padding(
@@ -74,6 +84,12 @@ class PlayerLoginScreen extends StatelessWidget {
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: TextFormField(
               controller: controller,
+              validator: (value){
+                if(value!.isEmpty){
+                  return AppStrings.invalidData;
+                }
+                return null;
+              },
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 border: OutlineInputBorder(

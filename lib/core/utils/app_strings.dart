@@ -54,7 +54,6 @@ class AppStrings {
   static const String no = 'لا';
   static const String success = 'تمت العملية بنجاح';
   static const String successDeleted = 'تم حذف العنصر بنجاح';
-  static const String chooseLevel = 'اختر التمرين والمستوي';
   static const String editProfile = 'الملف الشخصى';
   static const String addChild = 'اضافة طفل';
   static const String childrenRecords = 'سجل الاطفال';
@@ -86,9 +85,25 @@ class AppStrings {
   static const String  player = 'اللاعب';
   static const String  theDoctor = 'الطبيب';
   static const String  chooseUser = 'اختر المستخدم';
-
   static const String chooseLevelOrEx = 'اختر التمرين والمستوي';
   static const String chooseLevel = 'اختر المستوي';
   static const String logout = 'تسجيل الخروج';
+  static const String passwordNotMatch = 'كلمة المرور غير متطابقة';
+  static const String passwordLength = 'يجب أن تكون كلمة المرور 8 أحرف على الأقل';
+  static const String invalidData = 'بيانات غير صحيحة';
+  static const String invalidEmail = 'البريد الالكتروني غير صحيح';
+  static const String invalidPhone = 'الهاتف غير صحيح';
+  static const String invalidName = 'الاسم غير صحيح';
+  static const String invalidAddress = 'العنوان غير صحيح';
+  static const String invalidAge = 'العمر غير صحيح';
+  static const String invalidScore = 'النقاط غير صحيحة';
+  static const String invalidRegameCount = 'عدد المحاولات غير صحيحة';
+  static const String invalidGameTime = 'وقت العب غير صحيح';
+  static const String passwordNotValid = 'كلمة المرور غير صحيحة';
+  static const String notAdmin = 'ليس لديك صلاحية الوصول لهذه الصفحة';
+  static const String notPlayer = 'ليس لديك صلاحية الوصول لهذه الصفحة';
+  static const String notDoctor = 'ليس لديك صلاحية الوصول لهذه الصفحة';
 
 }
+
+

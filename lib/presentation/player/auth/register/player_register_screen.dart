@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
 import 'package:let_s_have_fun/core/utils/app_strings.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
+import 'package:let_s_have_fun/presentation/player/auth/register/controller/player_register_controller.dart';
 import 'package:let_s_have_fun/widgets/auth_background.dart';
 
-class PlayerRegisterScreen extends StatelessWidget {
-
+class PlayerRegisterScreen extends GetWidget<PlayerRegisterController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -14,36 +15,10 @@ class PlayerRegisterScreen extends StatelessWidget {
             fit: StackFit.expand,
             children: [
             AuthBackground(),
-            Center(
-              child: SingleChildScrollView(
-                child: Column(
-                    children: [
-                      Text(AppStrings.register,style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-                      )),
-                    _buildTextField(AppStrings.name),
-                    _buildTextField(AppStrings.phone),
-                    _buildTextField(AppStrings.email),
-                    _buildTextField(AppStrings.password),
-                    _buildTextField(AppStrings.confirmPassword),
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      width:  double.maxFinite,
-                      child: ElevatedButton(onPressed: () {
-                        Get.toNamed(AppRoutes.exercisesScreen);
-                      }, child: Text(AppStrings.register),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xFF1E9F9E),
-                        foregroundColor: Colors.white
-                      )),
-                    ),
-                      TextButton(onPressed: () {
-                        Get.toNamed(AppRoutes.playerLoginScreen);
-                      }, child: Text(AppStrings.iHaveAccount))
-                  ],
-                ),
+            Obx(()=> Center(
+                child: controller.state.value.getScreenWidget(_content(), (){
+                  controller.register();
+                })
               ),
             ),
             Align(
@@ -57,6 +32,40 @@ class PlayerRegisterScreen extends StatelessWidget {
       ),
     );
   }
+
+  _content()=>SingleChildScrollView(
+    child: Form(
+      key: controller.formKey,
+      child: Column(
+        children: [
+          Text(AppStrings.register,style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.white
+          )),
+          _buildTextField(AppStrings.name,controller: controller.nameController),
+          _buildTextField(AppStrings.phone,controller: controller.phoneController),
+          _buildTextField(AppStrings.email,controller: controller.emailController),
+          _buildTextField(AppStrings.password,controller: controller.passwordController),
+          _buildTextField(AppStrings.confirmPassword,controller: controller.confirmPasswordController),
+          Container(
+            padding: EdgeInsets.all(8.0),
+            width:  double.maxFinite,
+            child: ElevatedButton(onPressed: () {
+              controller.register();
+            }, child: Text(AppStrings.register),
+                style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF1E9F9E),
+                    foregroundColor: Colors.white
+                )),
+          ),
+          TextButton(onPressed: () {
+            Get.toNamed(AppRoutes.playerLoginScreen);
+          }, child: Text(AppStrings.iHaveAccount))
+        ],
+      ),
+    ),
+  );
 
   _buildTextField(String title , {TextEditingController? controller}) {
     return Padding(
@@ -77,6 +86,12 @@ class PlayerRegisterScreen extends StatelessWidget {
              clipBehavior: Clip.antiAliasWithSaveLayer,
             child: TextFormField(
               controller: controller,
+             validator: (value) {
+               if(value!.isEmpty){
+                 return AppStrings.invalidData;
+               }
+               return null;
+             },
              textInputAction: TextInputAction.next,
              decoration: InputDecoration(
                border: OutlineInputBorder(

@@ -1,13 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:let_s_have_fun/core/constant/constant.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
-import 'package:let_s_have_fun/presentation/player/games/game_screen.dart';
 import 'core/app_export.dart';
-
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then((value) {
