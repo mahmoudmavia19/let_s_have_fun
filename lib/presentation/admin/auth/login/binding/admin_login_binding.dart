@@ -7,7 +7,7 @@ import '../controller/admin_login_controller.dart';
 class AdminLoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => AdminApiClient(Get.find(), Get.find()));
+    Get.lazyPut(() => AdminApiClient(Get.find(), Get.find(), Get.find()));
     Get.lazyPut(() => AdminRemoteDataSourceImpl(Get.find(), Get.find()));
     Get.lazyPut(() => AdminLoginController());
   }

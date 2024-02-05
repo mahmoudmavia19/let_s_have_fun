@@ -64,7 +64,9 @@ class GameScreen extends StatelessWidget {
                               widthFactor: 1.46,
                               alignment: Alignment.topLeft,
                               child: Container(
-                                child:MessageCard(level.games?.first.question??''),
+                                child:MessageCard(level.games?.first.question??'',() {
+
+                                }),
                               ),
                             ),
                           ],
@@ -86,12 +88,13 @@ class GameScreen extends StatelessWidget {
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
                         ),
-                        itemCount:level.games?.first.imgsAnswer?.length,// level.game?.imgsAnswer?.length,
+                        itemCount:level.games?.first.imgsAnswer.length,// level.game?.imgsAnswer?.length,
                         itemBuilder: (context, index) {
                           //return Image.asset(level.game?.imgsAnswer?[index]??'');
+                          if(level.games!.first.imgsAnswer[index].url?.isNotEmpty??false)
                           return  InkWell(
                             onTap: () {
-                              if(level.games!.first.currentIndex==index || level.games!.first.currentIndex2==index){
+                              if(level.games!.first.imgsAnswer[index].isSelected){
                                 Get.dialog(
                                     SuccessDialog(title:level.games?.first.successMessage??'',)
                                 );
@@ -106,7 +109,7 @@ class GameScreen extends StatelessWidget {
                               width: 97,
                               height: 90,
                               padding: EdgeInsets.all(2),
-                              child: Image.asset(level.games!.first.imgsAnswer![index],),
+                              child: Image.asset(level.games!.first.imgsAnswer[index].url!,),
                               decoration: BoxDecoration(
                                   color: Color(0xFFE3E3E3),
                                   borderRadius: BorderRadius.circular(15.0)
@@ -114,6 +117,7 @@ class GameScreen extends StatelessWidget {
 
                             ),
                           );
+                          return Container();
                         },
                       ),
                     )

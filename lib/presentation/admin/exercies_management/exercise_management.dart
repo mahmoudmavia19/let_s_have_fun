@@ -17,7 +17,7 @@ class ExerciseScreen extends StatelessWidget {
       body: Obx(
           () => exerciseController.state.value.getScreenWidget(_widget(), () {
                 exerciseController.checkState();
-                print('object');
+               exerciseController.getAllExercies();
               })),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -56,7 +56,7 @@ class ExerciseScreen extends StatelessWidget {
                           showConfirmDialog(
                               AppStrings.delete, AppStrings.deleteExercise, () {
                             exerciseController.deleteExercise(
-                                exerciseController.exercises[index].id);
+                                exerciseController.exercises[index]);
                           });
                         },
                         icon: Icon(
@@ -66,13 +66,10 @@ class ExerciseScreen extends StatelessWidget {
                   ],
                 ),
                 children: [
+                  if(exerciseController.exercises[index].levels?.isNotEmpty??false)
                   for (int i = 0;
                       i <
-                          exerciseController.levels
-                              .where((p0) =>
-                                  p0.exerciseId ==
-                                  exerciseController.exercises[index].id)
-                              .length;
+                exerciseController.exercises[index].levels!.length;
                       i++)
                     ListTile(
                       leading: Text("${i + 1}"),
@@ -87,11 +84,7 @@ class ExerciseScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            exerciseController.levels
-                                .where((p0) =>
-                                    p0.exerciseId ==
-                                    exerciseController.exercises[index].id)
-                                .toList()[i]
+                            exerciseController.exercises[index].levels![i]
                                 .title,
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold),
@@ -99,11 +92,7 @@ class ExerciseScreen extends StatelessWidget {
                           Text(
                             AppStrings.levelScore +
                                 ':' +
-                                exerciseController.levels
-                                    .where((p0) =>
-                                        p0.exerciseId ==
-                                        exerciseController.exercises[index].id)
-                                    .toList()[i]
+                                exerciseController.exercises[index].levels![i]
                                     .levelScore
                                     .toString(),
                             style: TextStyle(fontSize: 14),
@@ -114,13 +103,9 @@ class ExerciseScreen extends StatelessWidget {
                           onPressed: () {
                             showConfirmDialog(
                                 AppStrings.delete, AppStrings.deleteLevel, () {
-                              exerciseController.deleteLevel(exerciseController
-                                  .levels
-                                  .where((p0) =>
-                                      p0.exerciseId ==
-                                      exerciseController.exercises[index].id)
-                                  .toList()[i]
-                                  .id);
+                              exerciseController.deleteLevel(
+                                  exerciseController.exercises[index],
+                                  exerciseController.exercises[index].levels![i].id);
                             });
                           },
                           icon: Icon(

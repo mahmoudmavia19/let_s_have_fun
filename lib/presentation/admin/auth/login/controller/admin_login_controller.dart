@@ -22,7 +22,7 @@ class AdminLoginController extends GetxController {
       }, (data) {
         state.value = ContentState();
         if(data){
-          Get.offAllNamed(AppRoutes.showAllChildrenDoctors);
+          Get.offAllNamed(AppRoutes.exerciseManagementAdmin);
         } else {
           state.value = ErrorState(StateRendererType.popupErrorState,AppStrings.notAdmin);
         }

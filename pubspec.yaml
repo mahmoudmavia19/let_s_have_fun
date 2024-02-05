@@ -21,6 +21,8 @@ dependencies:
   firebase_auth: ^4.17.0
   cloud_firestore: ^4.15.0
   dartz: ^0.10.1
+  firebase_storage: ^11.6.4
+  flutter_tts: ^3.8.5
 dev_dependencies:
   flutter_test: 
     sdk: flutter

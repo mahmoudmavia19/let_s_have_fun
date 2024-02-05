@@ -22,26 +22,8 @@ class GamesManagement extends GetWidget<GameController> {
                     collapsedBackgroundColor:exerciseController.exercises[index].color,
                     title:Text(exerciseController.exercises[index].title,
                       style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
-                    leading: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        InkWell(
-                            onTap: () {
-                              exerciseController.showAddLevelDialog(exerciseController.exercises[index]);
-                            },
-                            child: Image.asset('assets/images/level_icon.png',width: 23,)),
-
-                        IconButton(
-                            onPressed: () {
-                              showConfirmDialog(AppStrings.delete, AppStrings.deleteExercise, () {
-                                exerciseController.deleteExercise(exerciseController.exercises[index].id);
-                              });
-                            },
-                            icon: Icon(Icons.delete,color: Colors.red ,)),
-                      ],
-                    ),
                     children:[
-                      for (int i = 0; i < exerciseController.levels.where((p0) => p0.exerciseId==exerciseController.exercises[index].id).length; i++)
+                      for (int i = 0; i < exerciseController.exercises[index].levels!.where((p0) => p0.exerciseId==exerciseController.exercises[index].uid).length; i++)
                         ListTile(
                           leading: Text("${i+1}"),
                           title: Text(AppStrings.level +' '+convertToArabicWords((i+1).toString())!,
@@ -49,17 +31,12 @@ class GamesManagement extends GetWidget<GameController> {
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(exerciseController.levels.where((p0) => p0.exerciseId==exerciseController.exercises[index].id).toList()[i].title, style:  TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
-                              Text(AppStrings.levelScore +':'+exerciseController.levels.where((p0) => p0.exerciseId==exerciseController.exercises[index].id).toList()[i].levelScore.toString() , style:  TextStyle(fontSize: 14),),
+                              Text(exerciseController.exercises[index].levels!.where((p0) => p0.exerciseId==exerciseController.exercises[index].uid).toList()[i].title, style:  TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                              Text(AppStrings.levelScore +':'+exerciseController.exercises[index].levels!.where((p0) => p0.exerciseId==exerciseController.exercises[index].uid).toList()[i].levelScore.toString() , style:  TextStyle(fontSize: 14),),
                             ],
                           ),
-                          trailing: IconButton(onPressed: (){
-                            showConfirmDialog(AppStrings.delete, AppStrings.deleteLevel, () {
-                              exerciseController.deleteLevel(exerciseController.levels.where((p0) => p0.exerciseId==exerciseController.exercises[index].id).toList()[i].id);
-                            }) ;
-                          }, icon: Icon(Icons.delete,color: Colors.red,)),
                           onTap: () {
-                            controller.getLevel(exerciseController.levels.where((p0) => p0.exerciseId==exerciseController.exercises[index].id).toList()[i]) ;
+                            controller.getLevel(exerciseController.exercises[index],exerciseController.exercises[index].levels![i]) ;
                             Get.back();
                           },
                         )
@@ -107,7 +84,7 @@ class GamesManagement extends GetWidget<GameController> {
               child:Text(AppStrings.chooseLevel,textAlign: TextAlign.center,),
             );
           }
-        ):  FloatingActionButton(
+        ): controller.currentLevel.value?.games !=null ?  FloatingActionButton(
           onPressed: (){
            // Get.to(PlayArea(controller.color!));
             Get.toNamed(AppRoutes.perViewAdmin,arguments: [
@@ -116,87 +93,97 @@ class GamesManagement extends GetWidget<GameController> {
             ]);
           },
           child: Icon(Icons.slideshow_sharp),
-        ),
+        ):Container(),
       ),
     );
   }
 
   _widget()=>SingleChildScrollView(
     padding: const EdgeInsets.all(16.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        TextFormField(
-          controller: controller.questionController,
-          decoration: InputDecoration(label:RequiredText( AppStrings.question)),
-        ),
-        SizedBox(height: 16.0),
-        TextFormField(
-          onTap: () {},
-          readOnly: true,
-          controller: controller.imgController,
-          decoration: InputDecoration(
-              label:RequiredText( AppStrings.imgUrl),
-              suffixIcon: Icon(Icons.upload)
+    child: Form(
+      key: controller.formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextFormField(
+            controller: controller.questionController,
+            decoration: InputDecoration(label:RequiredText( AppStrings.question)),
+            validator: controller.validate,
           ),
-        ),
-        SizedBox(height: 16.0),
-        Container(
-          child: Row(
-            children: [
-              Expanded(child: Container(height: 1,color: Colors.grey,)),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(AppStrings.answers,style: TextStyle(fontSize: 16.0),),
-              ),
-              Expanded(child: Container(height: 1,color: Colors.grey,)) ,
-            ],
-          ),
-        ),
-        // images
-        for(int i=0;i<6;i++)...[
+          SizedBox(height: 16.0),
           TextFormField(
             onTap: () {
-              print('object');
-              controller.getImage(i);
+              controller.getQImage();
             },
             readOnly: true,
-            controller: controller.imgsAnswerControllers[i],
+            controller: controller.imgController,
             decoration: InputDecoration(
-                label:Text(AppStrings.imgUrl+' '+ convertToArabicWords('${i+1}')!),
-                suffixIcon:Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.cloud_upload),
-                    IconButton(onPressed: (){
-                      controller.imgsAnswerControllers[i].clear();
-                      controller.isImgSelected[i].value = false ;
-                    }, icon: Icon(Icons.clear))
-                  ],
-                ),
-                prefixIcon: Obx(()=>Checkbox(
-                  value: controller.isImgSelected[i].value,
-                  onChanged: (value) {
-                    controller.checkImgSelected(i);
-                  },
-                ),
-                )
+                label:RequiredText( AppStrings.imgUrl),
+                suffixIcon: Icon(Icons.upload)
             ),
           ),
           SizedBox(height: 16.0),
+          Container(
+            child: Row(
+              children: [
+                Expanded(child: Container(height: 1,color: Colors.grey,)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(AppStrings.answers,style: TextStyle(fontSize: 16.0),),
+                ),
+                Expanded(child: Container(height: 1,color: Colors.grey,)) ,
+              ],
+            ),
+          ),
+          // images
+          for(int i=0;i<6;i++)...[
+            TextFormField(
+              onTap: () {
+                print('object');
+                controller.getImage(i);
+              },
+              readOnly: true,
+              controller: controller.imgsAnswerControllers[i],
+              validator: controller.validateList,
+              decoration: InputDecoration(
+                  label:Text(AppStrings.imgUrl+' '+ convertToArabicWords('${i+1}')!),
+                  suffixIcon:Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.cloud_upload),
+                      IconButton(onPressed: (){
+                        controller.imgsAnswerControllers[i].clear();
+                        controller.isImgSelected[i].value = false ;
+                        controller. currentLevel.value?.games?.first.imgsAnswer[i].isSelected =false;
+                        controller. currentLevel.value?.games?.first.imgsAnswer[i].url = null;
+                      }, icon: Icon(Icons.clear))
+                    ],
+                  ),
+                  prefixIcon: Obx(()=>Checkbox(
+                    value: controller.isImgSelected[i].value,
+                    onChanged: (value) {
+                      controller.checkImgSelected(i);
+                     },
+                  ),
+                  )
+              ),
+            ),
+            SizedBox(height: 16.0),
+          ],
+          TextFormField(
+              controller: controller.successMessageController,
+              validator: controller.validate,
+              decoration: InputDecoration(
+                label:Text(AppStrings.enterSuccessMessage),)
+          ),
+          ElevatedButton(
+            onPressed: () {
+              controller.saveGame();
+            },
+            child: Text(AppStrings.saveGame),
+          ),
         ],
-        TextFormField(
-            controller: controller.successMessageController,
-            decoration: InputDecoration(
-              label:Text(AppStrings.enterSuccessMessage),)
-        ),
-        ElevatedButton(
-          onPressed: () {
-            controller.saveGame();
-          },
-          child: Text(AppStrings.saveGame),
-        ),
-      ],
+      ),
     ),
   );
 }

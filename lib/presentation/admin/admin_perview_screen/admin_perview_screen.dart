@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
  import 'package:let_s_have_fun/core/app_export.dart';
+import 'package:let_s_have_fun/presentation/admin/admin_perview_screen/controller/admin_perview_controller.dart';
 import 'package:let_s_have_fun/presentation/admin/exercies_management/model/level.dart';
 import 'package:let_s_have_fun/presentation/another_screen/play_area.dart';
 import 'package:let_s_have_fun/widgets/message_card.dart';
 
-import '../../core/utils/app_strings.dart';
+import '../../../core/utils/app_strings.dart';
+import '../../../widgets/dialogs.dart';
 
 
-class AdminPerView extends StatelessWidget {
+class AdminPerView extends GetWidget<AdminPerViewController>{
  Level level;
  Color color ;
 
  AdminPerView({required this.level,required this.color});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body:Center(
-        child: SizedBox(
-          width: 430,
-          height: 1068,
-          child: Stack(
-            children: [
-              PlayArea(color),
-              SingleChildScrollView(padding: EdgeInsets.only(top: 100.0),
-                child: Column(
+ @override
+ Widget build(BuildContext context) {
+   return  Scaffold(
+     body:Center(
+       child: SizedBox(
+         width: 430,
+         height: 1068,
+         child: Stack(
+           children: [
+             PlayArea(color),
+             SingleChildScrollView(padding: EdgeInsets.only(top: 100.0),
+               child: Column(
                  mainAxisSize: MainAxisSize.min,
                  children: [
                    Container(
@@ -64,13 +66,20 @@ class AdminPerView extends StatelessWidget {
                              widthFactor: 1.46,
                              alignment: Alignment.topLeft,
                              child: Container(
-                               child:MessageCard('محمد ياكل واقف ساعد محمد في الجلوس بالضغط على الكرسي'),
+                               child:MessageCard(level.games?.first.question??'',() {
+                                 controller.speak(level.games?.first.question??'') ;
+                               }),
                              ),
                            ),
                          ],
                        )
                    ),
-                   Image.asset(ImageConstant.testimg,width: 100,height: 200,),
+                   if(level.games?.first.img?.isNotEmpty??false)
+                     Image.network(level.games!.first.img!,width: 200,height: 200,
+                       fit: BoxFit.contain,
+                     ),
+                   if(level.games?.first.img?.isEmpty??true)
+                     SizedBox(height: 20,),
                    Align(
                      alignment: Alignment.center,
                      child: GridView.builder(
@@ -81,35 +90,48 @@ class AdminPerView extends StatelessWidget {
                          crossAxisSpacing: 10,
                          mainAxisSpacing: 10,
                        ),
-                       itemCount: 3,// level.game?.imgsAnswer?.length,
+                       itemCount:level.games?.first.imgsAnswer.length,// level.game?.imgsAnswer?.length,
                        itemBuilder: (context, index) {
                          //return Image.asset(level.game?.imgsAnswer?[index]??'');
-                        return  InkWell(
-                          onTap: () {
-                            print('object');
-                          },
-                          child: Container(
-                            width: 97,
-                            height: 90,
-                            padding: EdgeInsets.all(2),
-                            child: Image.asset([ImageConstant.testimge2,ImageConstant.testimge3,ImageConstant.testimge4][index],),
-                            decoration: BoxDecoration(
-                                color: Color(0xFFE3E3E3),
-                              borderRadius: BorderRadius.circular(15.0)
-                            ),
+                         if(level.games?.first.imgsAnswer[index].url!=null)
+                         return  InkWell(
+                           onTap: () {
+                             if(level.games?.first.imgsAnswer[index].isSelected??false){
+                               controller.speak(level.games?.first.successMessage??'');
+                               Get.dialog(
+                                   SuccessDialog(title:level.games?.first.successMessage??'',)
+                               );
+                             }else {
+                               Get.dialog(
+                                   NotSuccessDialog(title:level.games?.first.successMessage??'',)
+                               );
+                               controller.speak(AppStrings.notSuccess,);
+                             }
 
-                          ),
-                        );
+                           },
+                           child: Container(
+                             width: 97,
+                             height: 90,
+                             padding: EdgeInsets.all(2),
+                             child: Image.network(level.games!.first.imgsAnswer[index].url!,),
+                             decoration: BoxDecoration(
+                                 color: Color(0xFFE3E3E3),
+                                 borderRadius: BorderRadius.circular(15.0)
+                             ),
+
+                           ),
+                         );
+                         return Container();
                        },
                      ),
                    )
                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+               ),
+             )
+           ],
+         ),
+       ),
+     ),
+   );
+ }
 }

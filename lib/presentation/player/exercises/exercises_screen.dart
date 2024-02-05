@@ -12,7 +12,7 @@ import '../../../widgets/message_card.dart';
 
 class ExercisesScreen extends StatelessWidget {
   var color = ColorConstant.primary;
-  var level = Level(id: 0 , title:' title', exerciseId: 0, levelScore: 0);
+  var level = Level(id: 0 , title:' title', exerciseId: '0', levelScore: 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

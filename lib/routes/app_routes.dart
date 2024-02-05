@@ -1,3 +1,4 @@
+import 'package:let_s_have_fun/presentation/admin/admin_perview_screen/binding/admin_perview_binding.dart';
 import 'package:let_s_have_fun/presentation/another_screen/switch_user_screen.dart';
 import 'package:let_s_have_fun/presentation/doctor/auth/login/binding/doctor_login_binding.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/add_child_screen.dart';
@@ -15,7 +16,7 @@ import 'package:let_s_have_fun/presentation/splash_screen/splash_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:get/get.dart';
 
- import '../presentation/admin/admin_perview_screen.dart';
+ import '../presentation/admin/admin_perview_screen/admin_perview_screen.dart';
 import '../presentation/admin/auth/login/admin_login_screen.dart';
 import '../presentation/admin/auth/login/binding/admin_login_binding.dart';
 import '../presentation/admin/doctors_mangement/add_doctor_screen.dart';
@@ -95,6 +96,7 @@ class AppRoutes {
     GetPage (
       name: perViewAdmin,
       page: () => AdminPerView(level:Get.arguments[0] ,color:Get.arguments[1]),
+      binding: AdminPerViewBinding(),
     ),
     GetPage (
       name: usersManagementAdmin,

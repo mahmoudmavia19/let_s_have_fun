@@ -103,6 +103,7 @@ class AppStrings {
   static const String notAdmin = 'ليس لديك صلاحية الوصول لهذه الصفحة';
   static const String notPlayer = 'ليس لديك صلاحية الوصول لهذه الصفحة';
   static const String notDoctor = 'ليس لديك صلاحية الوصول لهذه الصفحة';
+  static const String successAdded = 'تمت العملية بنجاح';
 
 }
 
