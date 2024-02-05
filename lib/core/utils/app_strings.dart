@@ -57,6 +57,7 @@ class AppStrings {
   static const String editProfile = 'الملف الشخصى';
   static const String addChild = 'اضافة طفل';
   static const String childrenRecords = 'سجل الاطفال';
+  static const String childID = 'رقم الطفل';
   static const String saveChanges = 'حفظ التغييرات';
   static const String doctor = 'طبيب';
   static const String showAllChildren = 'اظهار جميع الاطفال';

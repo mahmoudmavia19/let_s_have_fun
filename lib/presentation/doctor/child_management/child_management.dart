@@ -47,13 +47,38 @@ class ShowAllChildrenScreen extends GetWidget<ChildController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.toNamed(AppRoutes.addChildScreen) ;
+        //  Get.toNamed(AppRoutes.addChildScreen) ;
+          Get.defaultDialog(
+            title: AppStrings.addChild,
+            content: TextFormField(
+              decoration: InputDecoration(
+                labelText: AppStrings.childID
+              ),
+            ),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text(AppStrings.cancel),
+              ),
+              ElevatedButton(
+                onPressed: () {
+
+                },
+                child: Text(AppStrings.addChild),
+              )
+            ]
+          );
         },
         child: Icon(Icons.add),
       ),
     );
   }
+
+
 }
+
 
 class UserListItem extends StatelessWidget {
   final User user;
