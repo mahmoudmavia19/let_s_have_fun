@@ -7,7 +7,8 @@ import 'model/doctor.dart';
 
 class DoctorDetailsDialog extends StatelessWidget {
   final Doctor doctor;
-  DoctorDetailsDialog({required this.doctor});
+  final void Function()? onPressed;
+  DoctorDetailsDialog({required this.doctor,required this.onPressed});
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -17,13 +18,13 @@ class DoctorDetailsDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('${AppStrings.email}: ${doctor.email}'),
-            Text('${AppStrings.phone}: ${doctor.phone}'),
-            Text('${AppStrings.profession}: ${doctor.profession}'),
-            Text('${AppStrings.hospital}: ${doctor.hospital}'),
-            Text('${AppStrings.nationality}: ${doctor.nationality}'),
-            Text('${AppStrings.age}: ${doctor.age}'),
-            Text('${AppStrings.yearsOfExperience}: ${doctor.yearsOfExperience}'),
+            Text('${AppStrings.email} ${doctor.email}'),
+            Text('${AppStrings.phone} ${doctor.phone}'),
+            Text('${AppStrings.profession} ${doctor.profession}'),
+            Text('${AppStrings.hospital} ${doctor.hospital}'),
+            Text('${AppStrings.nationality} ${doctor.nationality}'),
+            Text('${AppStrings.age} ${doctor.age}'),
+            Text('${AppStrings.yearsOfExperience} ${doctor.yearsOfExperience}'),
           ],
         ),
       ),
@@ -35,10 +36,8 @@ class DoctorDetailsDialog extends StatelessWidget {
           child: Text(AppStrings.cancel),
         ),
         ElevatedButton(
-          onPressed: () {
-            Get.back();
-          },
-          child: Text(AppStrings.blockUser),
+          onPressed:onPressed,
+          child: Text(doctor.isBlocked?AppStrings.unblockUser:AppStrings.blockUser),
         ),
       ],
     );

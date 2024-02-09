@@ -10,8 +10,6 @@ class PlayerAuthBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => PlayerRegisterController());
-    Get.lazyPut(() => PlayerApiClient(Get.find(), Get.find()));
-    Get.lazyPut(() => PlayerRemoteDataSourceImpl(Get.find(), Get.find()));
     Get.lazyPut(() => PlayerRegisterController());
     Get.lazyPut(() => PlayerLoginController());
   }

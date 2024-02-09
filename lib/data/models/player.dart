@@ -12,6 +12,7 @@ class Player {
   int? regameCount;
   Duration? gameTime;
   String? image;
+  bool isBlocked ;
 
   Player({
       this.id,
@@ -25,6 +26,7 @@ class Player {
     this.regameCount,
     this.gameTime,
     this.image,
+    this.isBlocked = false
   });
 
   // Serialize to JSON
@@ -41,6 +43,7 @@ class Player {
       'regameCount': regameCount,
       'gameTime': gameTime?.inSeconds??0, // Convert Duration to seconds
       'image': image,
+      'isBlocked': isBlocked
     };
   }
 
@@ -58,6 +61,7 @@ class Player {
       gameTime: Duration(seconds: json['gameTime']??0),
       image: json['image'],
       id: json['id'],
+      isBlocked: json['isBlocked'] ?? false
     );
   }
 }

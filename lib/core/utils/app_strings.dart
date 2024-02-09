@@ -38,6 +38,7 @@ class AppStrings {
   static const String regameCount = 'عدد المحاولات: ';
   static const String gameTime = 'وقت العب: ';
   static const String blockUser = 'حظر المستخدم';
+  static const String unblockUser = 'الغاء حظر المستخدم';
   static const String hospital = 'المستشفي: ';
   static const String profession = 'المهنة: ';
   static const String photo = 'الصورة: ';
@@ -104,6 +105,7 @@ class AppStrings {
   static const String notPlayer = 'ليس لديك صلاحية الوصول لهذه الصفحة';
   static const String notDoctor = 'ليس لديك صلاحية الوصول لهذه الصفحة';
   static const String successAdded = 'تمت العملية بنجاح';
+  static const String noData = 'لا يوجد بيانات';
 
 }
 

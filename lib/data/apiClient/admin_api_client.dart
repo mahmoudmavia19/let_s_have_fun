@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:let_s_have_fun/data/models/game_request.dart';
+import 'package:let_s_have_fun/data/models/player.dart';
+import 'package:let_s_have_fun/presentation/admin/doctors_mangement/model/doctor.dart';
 import 'package:let_s_have_fun/presentation/admin/exercies_management/model/Exercise.dart';
 import 'package:let_s_have_fun/presentation/admin/games_management/model/game.dart';
 
@@ -87,10 +89,57 @@ class AdminApiClient {
     });
     return game ;
   }
+  Future<void> addDoctorToFirebase(Doctor doctor, String password) async {
+    // Create authentication account
+    UserCredential authResult = await firebaseAuth.createUserWithEmailAndPassword(
+      email: doctor.email!,
+      password: password,
+    );
 
-// get list of exercies
- // get list of levels of exercies
- // post new exercies
-// post new levels of exercies
+    User? user = authResult.user;
+    if (user == null) {
+      print('Error creating user account');
+      return;
+    }
+    doctor.uid = user.uid;
+    await firebaseFirestore.collection('doctors').doc(user.uid).set(doctor.toJson());
+
+    print('Doctor added successfully');
+  }
+
+
+  Future<void> updateDoctor(Doctor doctor) async {
+    await firebaseFirestore.collection('doctors').doc(doctor.uid).update(doctor.toJson());
+  }
+
+
+  Future<List<Doctor>> getDoctorsList() {
+    return firebaseFirestore.collection('doctors').get().then((querySnapshot) {
+      List<Doctor> doctorsList = querySnapshot.docs.map((doc) {
+        Map<String, dynamic> data = doc.data();
+         var doctor  = Doctor.fromJson(data);
+         doctor.uid = doc.id;
+        return doctor;
+      }).toList();
+
+      return doctorsList;
+    }).catchError((e) {
+       return <Doctor>[];
+    });
+  }
+
+  Future<List<Player>> getPlayersList() async{
+    return (await firebaseFirestore.collection('players').get()).docs.map((doc) {
+      Map<String, dynamic> data = doc.data();
+      var player  = Player.fromJson(data);
+      player.id = doc.id;
+      return player;
+    }) .toList();
+  }
+
+  Future<void> updatePlayer(Player player) async{
+    await firebaseFirestore.collection('players').doc(player.id).update(player.toJson());
+  }
+
 
 }

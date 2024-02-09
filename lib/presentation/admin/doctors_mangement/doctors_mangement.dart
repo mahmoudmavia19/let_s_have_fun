@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 import 'package:let_s_have_fun/presentation/admin/doctors_mangement/controller/doctors_controller.dart';
 import 'package:let_s_have_fun/presentation/admin/doctors_mangement/doctor_details_dialog.dart';
 import 'package:let_s_have_fun/widgets/admin_drawer.dart';
@@ -11,7 +12,7 @@ import '../../../core/utils/color_constant.dart';
 import 'model/doctor.dart';
 
 class ShowAllDoctorsScreen extends StatelessWidget {
-  final DoctorsController controller = Get.put(DoctorsController());
+  final DoctorsController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +33,9 @@ class ShowAllDoctorsScreen extends StatelessWidget {
       body: Center(
         child: Obx(
               () {
-            if (controller.doctors.isEmpty) {
-              return Text('لا توجد أطباء.');
-            }
-            return ListView.builder(
-              itemCount: controller.doctors.length,
-              itemBuilder: (context, index) {
-                Doctor doctor = controller.doctors[index];
-                return DoctorListItem(doctor: doctor);
-              },
-            );
+            return controller.state.value.getScreenWidget(_widget(), (){
+              controller.getDoctors();
+            });
           },
         ),
       ),
@@ -52,19 +46,30 @@ class ShowAllDoctorsScreen extends StatelessWidget {
       child: Icon(Icons.add),),
     );
   }
+  _widget()=>ListView.builder(
+    itemCount: controller.doctors.length,
+    itemBuilder: (context, index) {
+      Doctor doctor = controller.doctors[index];
+      return DoctorListItem(doctor: doctor);
+    },
+  );
 }
 
 class DoctorListItem extends StatelessWidget {
   final Doctor doctor;
+  final DoctorsController controller = Get.find();
 
   DoctorListItem({required this.doctor});
 
   @override
   Widget build(BuildContext context) {
+
     return Card(
       child: ListTile(
         onTap: () {
-          Get.dialog(DoctorDetailsDialog(doctor: doctor));
+          Get.dialog(DoctorDetailsDialog(doctor: doctor,onPressed: () {
+             controller.blockDoctor(doctor);
+          },));
         },
         title: Text(doctor.name??'', style: TextStyle(color: ColorConstant.primary, fontSize: 20.0)),
         subtitle: Column(

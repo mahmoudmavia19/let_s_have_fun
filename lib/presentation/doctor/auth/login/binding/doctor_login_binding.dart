@@ -8,8 +8,6 @@ import '../controller/doctor_login_controller.dart';
 class DoctorLoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => DoctorApiClient(Get.find(), Get.find()));
-    Get.lazyPut(() => DoctorRemoteDataSourceImpl(Get.find(), Get.find()));
     Get.lazyPut(() => DoctorLoginController());
   }
 }

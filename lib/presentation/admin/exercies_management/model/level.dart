@@ -6,14 +6,18 @@ class Level {
   String? levelNumber;
   String exerciseId;
   int levelScore;
-  List<Game>? games;
+  List<Game>? games =  [
+    Game(
+        question: ''
+    )
+  ];
 
   Level({
     required this.id,
     required this.title,
     required this.exerciseId,
     required this.levelScore,
-    this.games,
+    this.games ,
     this.levelNumber,
   });
 

@@ -1,6 +1,6 @@
-import 'dart:convert';
 
 class Doctor {
+  String? uid;
   String? name;
   String? email;
   String? phone;
@@ -10,8 +10,10 @@ class Doctor {
   String? nationality;
   int? age;
   int? yearsOfExperience;
+  bool  isBlocked;
 
   Doctor({
+    this.uid,
     this.name,
     this.email,
     this.phone,
@@ -21,11 +23,13 @@ class Doctor {
     this.nationality,
     this.age,
     this.yearsOfExperience,
+    this.isBlocked = false
   });
 
   // Serialize to JSON
   Map<String, dynamic> toJson() {
     return {
+      'uid': uid,
       'name': name,
       'email': email,
       'phone': phone,
@@ -35,12 +39,14 @@ class Doctor {
       'nationality': nationality,
       'age': age,
       'yearsOfExperience': yearsOfExperience,
+      'isBlocked': isBlocked
     };
   }
 
   // Deserialize from JSON
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
+      uid: json['uid'],
       name: json['name'],
       email: json['email'],
       phone: json['phone'],
@@ -50,6 +56,7 @@ class Doctor {
       nationality: json['nationality'],
       age: json['age'],
       yearsOfExperience: json['yearsOfExperience'],
+      isBlocked: json['isBlocked']??false
     );
   }
 }

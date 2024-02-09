@@ -8,7 +8,5 @@ class ExerciseBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => AdminApiClient(Get.find(), Get.find(), Get.find()));
-    Get.lazyPut(() => AdminRemoteDataSourceImpl(Get.find(), Get.find()));
-    Get.lazyPut(() => ExerciseController());
   }
 }
