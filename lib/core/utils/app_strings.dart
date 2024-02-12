@@ -68,6 +68,8 @@ class AppStrings {
 
   static const String playHistoryTitle = 'سجل لعب';
   static const String addCommentsTitle = 'اضافة تعليق ل';
+  static const String showAllComments = 'اظهار التعليقات';
+  static const String doctors = 'الاطباء';
 
   static String playHistoryForChild(String childName) => '$playHistoryTitle $childName';
   static String addCommentsForChild(String childName) => '$addCommentsTitle$childName';
@@ -78,5 +80,6 @@ class AppStrings {
   static const String notSuccess = 'الاجابة غير صحيحة';
   static const String nextLevel = 'المستوى التالى';
   static const String replay = 'أعد المحاولة';
+  static const String playHistory = 'سجل العب';
 
 }

@@ -8,6 +8,8 @@ import 'package:let_s_have_fun/presentation/doctor/child_play_history/view_user_
 import 'package:let_s_have_fun/presentation/doctor/edit_profile/edit_profile.dart';
 import 'package:let_s_have_fun/presentation/player/games/binding/game_binding.dart';
 import 'package:let_s_have_fun/presentation/player/games/game_screen.dart';
+import 'package:let_s_have_fun/presentation/player/player_records/binding/player_record_binding.dart';
+import 'package:let_s_have_fun/presentation/player/player_records/player_records_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/splash_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:get/get.dart';
@@ -28,6 +30,8 @@ import '../presentation/player/exercises/binding/exercises_binding.dart';
 import '../presentation/player/exercises/exercises_screen.dart';
 import '../presentation/player/levels/binding/levels_binding.dart';
 import '../presentation/player/levels/levels_screen.dart';
+import '../presentation/player/player_doctors_screen/binding/player_doctors_binding.dart';
+import '../presentation/player/player_doctors_screen/player_doctors_screen.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
@@ -50,6 +54,8 @@ class AppRoutes {
   static const String exercisesScreen = '/player/exercises_screen';
   static const String levelsScreen = '/player/levels_screen';
   static const String gameScreen = '/player/game_screen';
+  static const String playerRecords = '/player/player_records';
+  static const String playerDoctorsScreen = '/player/player_doctors_screen';
 
 
 
@@ -149,6 +155,15 @@ class AppRoutes {
       page: () => GameScreen(level: Get.arguments[0] , color: Get.arguments[1]),
       binding: GameBinding(),
     ),
-
+    GetPage (
+      name: playerRecords,
+      page: () => PlayerRecords(),
+      binding: PlayerRecordBinding(),
+    ),
+    GetPage(
+      name: playerDoctorsScreen,
+      page: () => PlayerDoctorsScreen(),
+      binding: PlayerDoctorsBinding(),
+    )
   ];
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_s_have_fun/core/app_export.dart';
 import 'package:let_s_have_fun/core/constant/constant.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
 import 'package:let_s_have_fun/presentation/admin/exercies_management/model/level.dart';
@@ -34,11 +35,46 @@ class ExercisesScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(AppStrings.sections ,style: TextStyle(
-                              fontSize: 24 ,
-                              fontWeight: FontWeight.bold ,
-                              color: Colors.white
-                          ), ),
+                          Row(
+                            children: [
+                              Text(AppStrings.sections ,style: TextStyle(
+                                  fontSize: 24 ,
+                                  fontWeight: FontWeight.bold ,
+                                  color: Colors.white
+                              ), ),
+                              Spacer() ,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20.0),
+                                child: GestureDetector(
+                                  onTap:() {
+                                    Get.toNamed(AppRoutes.playerDoctorsScreen) ;
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.white,
+                                    child: Icon(Icons.health_and_safety_outlined,size: 50.0,
+                                      color:Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20.0),
+                                child: GestureDetector(
+                                  onTap:() {
+                                    Get.toNamed(AppRoutes.playerRecords) ;
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.white,
+                                    child: Icon(Icons.history_edu,size: 50.0,
+                                      color:Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ],
                       ),
                     ),
