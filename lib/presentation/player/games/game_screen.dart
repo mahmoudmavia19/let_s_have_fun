@@ -5,7 +5,7 @@ import 'package:let_s_have_fun/widgets/dialogs.dart';
 import '../../../core/utils/app_strings.dart';
 import '../../../widgets/message_card.dart';
 import '../../admin/exercies_management/model/level.dart';
-import '../../play_area.dart';
+import '../../another_screen/play_area.dart';
 
 class GameScreen extends StatelessWidget {
   Color color;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:let_s_have_fun/presentation/play_area.dart';
+import 'package:let_s_have_fun/presentation/another_screen/play_area.dart';
 import 'package:let_s_have_fun/widgets/level_item.dart';
 import '../../admin/exercies_management/model/Exercise.dart';
 
