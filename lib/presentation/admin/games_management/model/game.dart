@@ -4,10 +4,12 @@ class Game {
   String? successMessage;
   String? img;
   List<String>? imgsAnswer;
+  int? currentIndex;
+  int? currentIndex2;
   int? levelId;
   int? exerciseId;
 
-  Game({this.id,required this.question, this.img,required this.imgsAnswer , this.levelId, this.exerciseId,this.successMessage});
+  Game({this.id,required this.question, this.img,required this.imgsAnswer , this.levelId, this.exerciseId,this.successMessage, this.currentIndex,this.currentIndex2});
 
   Game.fromJson(Map<String, dynamic> json) {
     id = json['id'];

@@ -26,6 +26,7 @@ class AppStrings {
   static String imgUrl = "الصورة".tr;
   static String enterSuccessMessage = "رسالة الاجابه الصحيح".tr;
   static String reqStar = "*".tr;
+  static String sections = "الاقسام".tr;
   static String saveGame = "حفظ العبة".tr;
   static String answers = "الاجابات".tr;
   static const String name = 'الأسم: ';
@@ -53,6 +54,33 @@ class AppStrings {
   static const String no = 'لا';
   static const String success = 'تمت العملية بنجاح';
   static const String successDeleted = 'تم حذف العنصر بنجاح';
+  static const String chooseLevel = 'اختر التمرين والمستوي';
+  static const String editProfile = 'الملف الشخصى';
+  static const String addChild = 'اضافة طفل';
+  static const String childrenRecords = 'سجل الاطفال';
+  static const String saveChanges = 'حفظ التغييرات';
+  static const String doctor = 'طبيب';
+  static const String showAllChildren = 'اظهار جميع الاطفال';
+  static const String childernRecordsTitle = 'سجل الاطفال';
+  static const String noChildrenAvailable = 'لا يوجد اطفال متاحين';
+  static const String edit  = 'تعديل';
+  static const String close =   'اغلاق';
+
+  static const String playHistoryTitle = 'سجل لعب';
+  static const String addCommentsTitle = 'اضافة تعليق ل';
+  static const String showAllComments = 'اظهار التعليقات';
+  static const String doctors = 'الاطباء';
+
+  static String playHistoryForChild(String childName) => '$playHistoryTitle $childName';
+  static String addCommentsForChild(String childName) => '$addCommentsTitle$childName';
+
+  static const String enterComments = 'أدخل التعليقات';
+  static const String enterCommentsHint = 'أدخل التعليقات';
+  static const String saveComments = 'حفظ التعليقات';
+  static const String notSuccess = 'الاجابة غير صحيحة';
+  static const String nextLevel = 'المستوى التالى';
+  static const String replay = 'أعد المحاولة';
+  static const String playHistory = 'سجل العب';
   static const String chooseLevelOrEx = 'اختر التمرين والمستوي';
   static const String chooseLevel = 'اختر المستوي';
   static const String logout = 'تسجيل الخروج';

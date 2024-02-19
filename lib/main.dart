@@ -1,14 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:let_s_have_fun/core/utils/color_constant.dart';
-import 'core/app_export.dart';
+import 'package:intl/intl.dart';
+ import 'package:let_s_have_fun/core/utils/color_constant.dart';
+ import 'core/app_export.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then((value) {
+ //   print(DateFormat.allLocalesWithSymbols());
+    initializeDateFormatting('ar');
     Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
     runApp(MyApp());
   });
@@ -55,7 +59,7 @@ class MyApp extends StatelessWidget {
         initialBinding: InitialBindings(),
          getPages: AppRoutes.pages,
         initialRoute:AppRoutes.splashScreen ,
-     //  home: PlayArea(ColorConstant.appColor[0]),
+      //  home:GameScreen(color:exercises.last.color!,level:exercises.last.levels!.last),
       );
     });
   }

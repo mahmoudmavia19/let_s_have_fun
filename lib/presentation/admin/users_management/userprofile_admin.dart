@@ -25,7 +25,7 @@ class UserProfileScreen extends StatelessWidget {
             Text('${AppStrings.level}: ${user.level}'),
             Text('${AppStrings.score}${user.score}'),
             Text('${AppStrings.regameCount}${user.regameCount}'),
-            Text('${AppStrings.gameTime}${user.gameTime.hour}:${user.gameTime.minute}'),
+            Text('${AppStrings.gameTime}${user.gameTime.inHours}:${user.gameTime.inMinutes}'),
              SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {

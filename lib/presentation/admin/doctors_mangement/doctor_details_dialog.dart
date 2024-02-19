@@ -11,7 +11,7 @@ class DoctorDetailsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title:Text(doctor.name,style: TextStyle(color: ColorConstant.primary,fontSize: 20.0),),
+      title:Text(doctor.name??'',style: TextStyle(color: ColorConstant.primary,fontSize: 20.0),),
       content: ListTile(
          subtitle:Column(
           mainAxisSize: MainAxisSize.min,
