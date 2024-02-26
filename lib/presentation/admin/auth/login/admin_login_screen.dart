@@ -32,7 +32,7 @@ class AdminLoginScreen extends StatelessWidget {
                           Get.toNamed(AppRoutes.exerciseManagementAdmin);
                         }, child: Text(AppStrings.login),
                             style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF1E9F9E),
+                                primary: Color(0xFFD27893),
                                 foregroundColor: Colors.white
                             )),
                       ),

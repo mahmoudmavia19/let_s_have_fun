@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/presentation/another_screen/play_area.dart';
 import 'package:let_s_have_fun/widgets/level_item.dart';
+import '../../../core/app_export.dart';
 import '../../admin/exercies_management/model/Exercise.dart';
 
 class LevelsScreen extends StatelessWidget {
@@ -22,20 +23,34 @@ class LevelsScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
-                      alignment: Alignment.centerRight,
-                      padding: EdgeInsets.only(right: 20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(exercise.title,style: TextStyle(
-                              fontSize: 24 ,
-                              fontWeight: FontWeight.bold ,
-                              color: Colors.white
-                          ), ),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          alignment: Alignment.centerRight,
+                          padding: EdgeInsets.only(right: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(exercise.title,style: TextStyle(
+                                  fontSize: 24 ,
+                                  fontWeight: FontWeight.bold ,
+                                  color: Colors.white
+                              ), ),
+                            ],
+                          ),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: IconButton(onPressed: (){
+                              Get.back();
+                            }, icon: Icon(Icons.home,color: Colors.red,)),
+                          ),
+                        ),
+                      ],
                     ),
                     Expanded(
                       child: ListView.builder(

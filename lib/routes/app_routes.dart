@@ -185,7 +185,7 @@ class AppRoutes {
     GetPage (
       name: switchUserLoginScreen,
       page: () => SwitchUserScreen()
-    )
+    ),
     GetPage (
       name: playerRecords,
       page: () => PlayerRecords(),

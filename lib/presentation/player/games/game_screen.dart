@@ -34,16 +34,37 @@ class GameScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(level.title,style: TextStyle(
-                              fontSize: 24 ,
-                              fontWeight: FontWeight.bold ,
-                              color: Colors.white
-                          ), ),
-                          Text(AppStrings.level +' '+(level.levelNumber??''),style: TextStyle(
-                              fontSize: 14 ,
-                              fontWeight: FontWeight.bold ,
-                              color: Colors.white
-                          ),),
+
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(level.title,style: TextStyle(
+                                      fontSize: 24 ,
+                                      fontWeight: FontWeight.bold ,
+                                      color: Colors.white
+                                  ), ),
+                                  Text(AppStrings.level +' '+(level.levelNumber??''),style: TextStyle(
+                                      fontSize: 14 ,
+                                      fontWeight: FontWeight.bold ,
+                                      color: Colors.white
+                                  ),),
+                                ],
+                              ),
+                              Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  child: IconButton(onPressed: (){
+                                    Get.back();
+                                    Get.back();
+                                  }, icon: Icon(Icons.home,color: Colors.red,)),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),

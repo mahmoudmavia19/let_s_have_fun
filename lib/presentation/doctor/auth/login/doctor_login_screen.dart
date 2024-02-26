@@ -32,7 +32,7 @@ class DoctorLoginScreen extends StatelessWidget {
                           Get.toNamed(AppRoutes.showAllChildrenDoctors);
                         }, child: Text(AppStrings.login),
                             style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF1E9F9E),
+                                primary: Color(0xFFD27893),
                                 foregroundColor: Colors.white
                             )),
                       ),

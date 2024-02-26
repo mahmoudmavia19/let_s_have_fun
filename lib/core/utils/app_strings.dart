@@ -90,11 +90,8 @@ class AppStrings {
   static const String  chooseUser = 'اختر المستخدم';
 
   static const String chooseLevelOrEx = 'اختر التمرين والمستوي';
-  static const String chooseLevel = 'اختر المستوي';
   static const String logout = 'تسجيل الخروج';
   static const String playHistory = 'سجل العب';
-  static const String chooseLevelOrEx = 'اختر التمرين والمستوي';
-  static const String chooseLevel = 'اختر المستوي';
-  static const String logout = 'تسجيل الخروج';
+  //static const String chooseLevel = 'اختر المستوي';
 
 }

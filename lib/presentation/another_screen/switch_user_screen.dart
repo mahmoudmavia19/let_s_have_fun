@@ -30,7 +30,7 @@ class SwitchUserScreen extends StatelessWidget {
                           Get.toNamed(AppRoutes.playerLoginScreen);
                         }, child: Text(AppStrings.player),
                             style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF1E9F9E),
+                                primary: Color(0xFFD27893),
                                 foregroundColor: Colors.white
                             )),
                       ),
@@ -41,7 +41,7 @@ class SwitchUserScreen extends StatelessWidget {
                           Get.toNamed(AppRoutes.adminLoginScreen);
                         }, child: Text(AppStrings.admin),
                             style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF1E9F9E),
+                                primary: Color(0xFFD27893),
                                 foregroundColor: Colors.white
                             )),
                       ),
@@ -52,7 +52,7 @@ class SwitchUserScreen extends StatelessWidget {
                           Get.toNamed(AppRoutes.doctorLoginScreen);
                         }, child: Text(AppStrings.theDoctor),
                             style: ElevatedButton.styleFrom(
-                                primary: Color(0xFF1E9F9E),
+                                primary: Color(0xFFD27893),
                                 foregroundColor: Colors.white
                             )),
                       ),
