@@ -32,7 +32,7 @@ class PlayerLoginScreen extends StatelessWidget {
                           Get.toNamed(AppRoutes.exercisesScreen);
                         }, child: Text(AppStrings.login),
                             style: ElevatedButton.styleFrom( 
-                                primary: Color(0xFFD27893),
+                                backgroundColor: Color(0xFFD27893),
                                 foregroundColor: Colors.white
                             )),
                       ),
