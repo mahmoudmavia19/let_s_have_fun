@@ -22,7 +22,7 @@ dependencies:
   cloud_firestore: ^4.15.0
   dartz: ^0.10.1
 dev_dependencies:
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 flutter: 
   uses-material-design: true

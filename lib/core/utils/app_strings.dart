@@ -67,6 +67,8 @@ class AppStrings {
 
   static const String playHistoryTitle = 'سجل لعب';
   static const String addCommentsTitle = 'اضافة تعليق ل';
+  static const String showAllComments = 'اظهار التعليقات';
+  static const String doctors = 'الاطباء';
 
   static String playHistoryForChild(String childName) => '$playHistoryTitle $childName';
   static String addCommentsForChild(String childName) => '$addCommentsTitle$childName';
@@ -86,7 +88,6 @@ class AppStrings {
   static const String  theDoctor = 'الطبيب';
   static const String  chooseUser = 'اختر المستخدم';
   static const String chooseLevelOrEx = 'اختر التمرين والمستوي';
-  static const String chooseLevel = 'اختر المستوي';
   static const String logout = 'تسجيل الخروج';
   static const String passwordNotMatch = 'كلمة المرور غير متطابقة';
   static const String passwordLength = 'يجب أن تكون كلمة المرور 8 أحرف على الأقل';
@@ -103,7 +104,7 @@ class AppStrings {
   static const String notAdmin = 'ليس لديك صلاحية الوصول لهذه الصفحة';
   static const String notPlayer = 'ليس لديك صلاحية الوصول لهذه الصفحة';
   static const String notDoctor = 'ليس لديك صلاحية الوصول لهذه الصفحة';
+  static const String playHistory = 'سجل العب';
+  //static const String chooseLevel = 'اختر المستوي';
 
 }
-
-

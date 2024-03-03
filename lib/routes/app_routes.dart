@@ -11,6 +11,8 @@ import 'package:let_s_have_fun/presentation/doctor/edit_profile/edit_profile.dar
 import 'package:let_s_have_fun/presentation/player/auth/register/binding/player_register_binding.dart';
 import 'package:let_s_have_fun/presentation/player/games/binding/game_binding.dart';
 import 'package:let_s_have_fun/presentation/player/games/game_screen.dart';
+import 'package:let_s_have_fun/presentation/player/player_records/binding/player_record_binding.dart';
+import 'package:let_s_have_fun/presentation/player/player_records/player_records_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/splash_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:get/get.dart';
@@ -36,6 +38,8 @@ import '../presentation/player/exercises/binding/exercises_binding.dart';
 import '../presentation/player/exercises/exercises_screen.dart';
 import '../presentation/player/levels/binding/levels_binding.dart';
 import '../presentation/player/levels/levels_screen.dart';
+import '../presentation/player/player_doctors_screen/binding/player_doctors_binding.dart';
+import '../presentation/player/player_doctors_screen/player_doctors_screen.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
@@ -64,6 +68,13 @@ class AppRoutes {
   static const String adminLoginScreen = '/auth/admin_login_screen';
   static const String doctorLoginScreen = '/auth/doctor_login_screen';
   static const String switchUserLoginScreen = '/auth/switch_user_login_screen';
+  static const String playerRecords = '/player/player_records';
+  static const String playerDoctorsScreen = '/player/player_doctors_screen';
+
+
+
+
+
 
   static List<GetPage> pages = [
     GetPage(
@@ -181,6 +192,16 @@ class AppRoutes {
     GetPage (
       name: switchUserLoginScreen,
       page: () => SwitchUserScreen()
+    ),
+    GetPage (
+      name: playerRecords,
+      page: () => PlayerRecords(),
+      binding: PlayerRecordBinding(),
+    ),
+    GetPage(
+      name: playerDoctorsScreen,
+      page: () => PlayerDoctorsScreen(),
+      binding: PlayerDoctorsBinding(),
     )
   ];
 }

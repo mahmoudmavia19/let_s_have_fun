@@ -7,17 +7,18 @@ class ColorConstant {
                                   fromHex('#FEED9B'),
                                   fromHex('#C1FAA9'),
                                   fromHex('#7CF0A7'),];
-   static  const MaterialColor  primary = MaterialColor(0xFF8DEFEE, {
-    50: Color.fromRGBO(141, 239, 238, .1),
-    100: Color.fromRGBO(141, 239, 238, .2),
-    200: Color.fromRGBO(141, 239, 238, .3),
-    300: Color.fromRGBO(141, 239, 238, .4),
-    400: Color.fromRGBO(141, 239, 238, .5),
-    500: Color.fromRGBO(141, 239, 238, .6),
-    600: Color.fromRGBO(141, 239, 238, .7),
-    700: Color.fromRGBO(141, 239, 238, .8),
-    800: Color.fromRGBO(141, 239, 238, .9),
-    900: Color.fromRGBO(141, 239, 238, 1),
+   static  const MaterialColor  primary = MaterialColor(0xFFF7CED8, {
+     50: Color.fromRGBO(247, 206, 216, 0.1),
+     100: Color.fromRGBO(247, 206, 216, 0.2),
+     200: Color.fromRGBO(247, 206, 216, 0.3),
+     300: Color.fromRGBO(247, 206, 216, 0.4),
+     400: Color.fromRGBO(247, 206, 216, 0.5),
+     500: Color.fromRGBO(247, 206, 216, 0.6),
+     600: Color.fromRGBO(247, 206, 216, 0.7),
+     700: Color.fromRGBO(247, 206, 216, 0.8),
+     800: Color.fromRGBO(247, 206, 216, 0.9),
+     900: Color.fromRGBO(247, 206, 216, 1.0),
+
   });
 }
 

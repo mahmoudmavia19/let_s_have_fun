@@ -49,7 +49,7 @@ class DoctorLoginScreen extends  GetWidget<DoctorLoginController> {
              controller.login();
            }, child: Text(AppStrings.login),
                style: ElevatedButton.styleFrom(
-                   primary: Color(0xFF1E9F9E),
+                   backgroundColor: Color(0xFF1E9F9E),
                    foregroundColor: Colors.white
                )),
          ),
