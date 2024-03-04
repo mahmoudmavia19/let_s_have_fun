@@ -27,23 +27,29 @@ class PlayerRegisterController extends GetxController {
     if(formKey.currentState!.validate()){
 
       if(passwordController.text == confirmPasswordController.text){
-       if(isEmailValid(emailController.text)){
-         if(isPasswordValid(passwordController.text)){
-           (await remoteDataSource.signUp(Player(
-             name: nameController.text,
-             phone: phoneController.text,
-             email: emailController.text,
-           ),
-               passwordController.text
-           )).fold((l){
-             state.value = ErrorState(StateRendererType.popupErrorState,l.message);
-           }, (r) {
-             state.value = ContentState();
-             Get.offAllNamed(AppRoutes.exercisesScreen);
-           });
-         } else {
-           state.value = ErrorState(StateRendererType.popupErrorState, AppStrings.passwordNotValid);
-         }
+       if(isEmailValid(emailController.text)) {
+         if (isPhoneNumberValid(phoneController.text)) {
+           if (isPasswordValid(passwordController.text)) {
+             (await remoteDataSource.signUp(Player(
+               name: nameController.text,
+               phone: phoneController.text,
+               email: emailController.text,
+             ),
+                 passwordController.text
+             )).fold((l) {
+               state.value =
+                   ErrorState(StateRendererType.popupErrorState, l.message);
+             }, (r) {
+               state.value = ContentState();
+               Get.offAllNamed(AppRoutes.exercisesScreen);
+             });
+           } else {
+             state.value = ErrorState(StateRendererType.popupErrorState,
+                 AppStrings.passwordNotValid);
+           }
+       } else {
+         state.value = ErrorState(StateRendererType.popupErrorState, AppStrings.phoneNotValid);
+       }
        } else {
          state.value = ErrorState(StateRendererType.popupErrorState, AppStrings.invalidEmail);
        }

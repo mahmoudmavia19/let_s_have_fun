@@ -20,6 +20,11 @@ bool isEmailValid(String email) {
   ).hasMatch(email);
 }
 
+// phone number validation start with 05 and length 10
+bool isPhoneNumberValid(String phoneNumber) {
+  return RegExp(r'^05\d{8}$').hasMatch(phoneNumber);
+}
+
 bool isPasswordValid(String password) {
     return RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(password);
 }

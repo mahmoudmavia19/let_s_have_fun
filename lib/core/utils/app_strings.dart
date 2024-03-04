@@ -13,6 +13,7 @@ class AppStrings {
   static String add = "اضافة".tr;
   static String cancel = "الغاء".tr;
   static String levelScore = "نقاط المستوى".tr;
+  static String phoneNotValid = "رقم الهاتف غير صحيح".tr;
   static String points = "نقاط".tr;
   static String chooseColor = "اختر اللون".tr;
   static String delete = "حذف".tr;
@@ -105,6 +106,7 @@ class AppStrings {
   static const String notPlayer = 'ليس لديك صلاحية الوصول لهذه الصفحة';
   static const String notDoctor = 'ليس لديك صلاحية الوصول لهذه الصفحة';
   static const String playHistory = 'سجل العب';
+  static const String chooseLevel = 'اختر المستوي';
   //static const String chooseLevel = 'اختر المستوي';
 
 }

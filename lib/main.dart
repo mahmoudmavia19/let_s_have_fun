@@ -1,17 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
 import 'core/app_export.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 void main() async{
-import 'package:intl/intl.dart';
- import 'package:let_s_have_fun/core/utils/color_constant.dart';
- import 'core/app_export.dart';
-import 'package:intl/date_symbol_data_local.dart';
-
-void main() {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

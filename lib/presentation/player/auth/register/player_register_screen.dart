@@ -55,7 +55,7 @@ class PlayerRegisterScreen extends GetWidget<PlayerRegisterController> {
               controller.register();
             }, child: Text(AppStrings.register),
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF1E9F9E),
+                    backgroundColor: Color(0xFFD27893),
                     foregroundColor: Colors.white
                 )),
           ),
@@ -98,7 +98,7 @@ class PlayerRegisterScreen extends GetWidget<PlayerRegisterController> {
                  borderRadius: BorderRadius.circular(10.0),
                ),
              ),
-                      ),
+            ),
           ),
         ],
       ),

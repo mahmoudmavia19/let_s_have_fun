@@ -53,7 +53,7 @@ class PlayerLoginScreen extends GetWidget<PlayerLoginController> {
              controller.login();
             }, child: Text(AppStrings.login),
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF1E9F9E),
+                    backgroundColor: Color(0xFFD27893),
                     foregroundColor: Colors.white
                 )),
           ),
@@ -64,37 +64,8 @@ class PlayerLoginScreen extends GetWidget<PlayerLoginController> {
       ),
     ),
   );
-                      _buildTextField(AppStrings.email),
-                      _buildTextField(AppStrings.password),
-                       Container(
-                        padding: EdgeInsets.all(8.0),
-                        width:  double.maxFinite,
-                        child: ElevatedButton(onPressed: () {
-                          Get.toNamed(AppRoutes.exercisesScreen);
-                        }, child: Text(AppStrings.login),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xFFD27893),
-                                foregroundColor: Colors.white
-                            )),
-                      ),
-                      TextButton(onPressed: () {
-                        Get.toNamed(AppRoutes.playerRegisterScreen);
-                      }, child: Text(AppStrings.iNotHaveAccount))
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(onPressed: () {
-                  Get.back();
-                }, icon: Icon(Icons.arrow_forward_ios)),
-              ),
-            ]
-        ) ,
-      ),
-    );
-  }
+
+
 
   _buildTextField(String title , {TextEditingController? controller}) {
     return Padding(

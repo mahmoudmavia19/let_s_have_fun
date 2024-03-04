@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1007050834003",
-    "project_id": "lets-have-fun-d9a3c",
-    "storage_bucket": "lets-have-fun-d9a3c.appspot.com"
+    "project_number": "855364195241",
+    "project_id": "lets-have-fun-7758c",
+    "storage_bucket": "lets-have-fun-7758c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1007050834003:android:6365201255185bee6c46a6",
+        "mobilesdk_app_id": "1:855364195241:android:999de2870540c89547eab8",
         "android_client_info": {
           "package_name": "com.letshavefun.app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDk7_QKJdlttNI-IFi583V4aqeOoe5WbRc"
+          "current_key": "AIzaSyBUNnGaDuegVE6Eez9vlgDGmhbZXciI8js"
         }
       ],
       "services": {
