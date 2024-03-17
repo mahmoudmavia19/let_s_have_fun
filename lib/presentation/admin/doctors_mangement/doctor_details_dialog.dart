@@ -31,9 +31,17 @@ class DoctorDetailsDialog extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset('assets/images/certificate.png'),
-                      TextButton(onPressed: (){
-                        Get.back();
-                      }, child: Text('قبول'))
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextButton(onPressed: (){
+                            Get.back();
+                          }, child: Text('قبول')),
+                          TextButton(onPressed: (){
+                            Get.back();
+                          }, child: Text('طلب اعادة ارسال')),
+                        ],
+                      )
                     ],
                   ),
                 )

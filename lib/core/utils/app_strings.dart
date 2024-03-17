@@ -73,6 +73,7 @@ class AppStrings {
   static const String addCommentsTitle = 'اضافة تعليق ل';
   static const String showAllComments = 'اظهار التعليقات';
   static const String doctors = 'الاخصائيين';
+  static const String newDoctors = 'الاخصائيين الجديدين';
   static const String certificate = 'الشهادة';
 
   static String playHistoryForChild(String childName) => '$playHistoryTitle $childName';

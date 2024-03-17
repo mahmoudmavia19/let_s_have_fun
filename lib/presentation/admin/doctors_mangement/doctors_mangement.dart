@@ -1,4 +1,5 @@
 // show_all_doctors_screen.dart
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
@@ -34,18 +35,42 @@ class ShowAllDoctorsScreen extends StatelessWidget {
           )
         ]
       ),
-      body: Center(
+      body: DefaultTabController(
+        length: 2,
         child: Obx(
               () {
             if (controller.doctors.isEmpty) {
-              return Text('لا توجد اخصائيين.');
+              return Center(child: Text('لا توجد اخصائيين.'));
             }
-            return ListView.builder(
-              itemCount: controller.doctors.length,
-              itemBuilder: (context, index) {
-                Doctor doctor = controller.doctors[index];
-                return DoctorListItem(doctor: doctor);
-              },
+            return Column(
+              children: [
+                SizedBox(
+                  height: 50.0,
+                  child: TabBar(tabs: [
+                    Text(AppStrings.newDoctors),
+                    Text(AppStrings.doctors),
+                  ],
+                  ),
+                ),
+                Expanded(
+                  child: TabBarView(children: [
+                    ListView.builder(
+                      itemCount: controller.doctors.length,
+                      itemBuilder: (context, index) {
+                        Doctor doctor = controller.doctors[index];
+                        return DoctorListItem(doctor: doctor);
+                      },
+                    ),
+                    ListView.builder(
+                      itemCount: controller.doctors.length,
+                      itemBuilder: (context, index) {
+                        Doctor doctor = controller.doctors[index];
+                        return DoctorListItem(doctor: doctor);
+                      },
+                    )
+                  ]),
+                )
+              ],
             );
           },
         ),
