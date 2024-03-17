@@ -42,10 +42,10 @@ class DoctorsController extends GetxController {
     // Initialize the list of doctors (you might fetch it from a data source)
     doctors.assignAll([
       Doctor(
-        name: "د.اسم الدكتور",
-        email: "test.doctor@example.com",
+        name: "د.اسم الاخصائي",
+        email: "test.sp@example.com",
         phone: "053-456-7890",
-        profession: "دكتور نفسي",
+        profession: "اخصائي نفسي",
         hospital: "مستشفى العام",
         photo: "https://example.com/ahmed_ali.jpg",
         nationality: "سعودي",

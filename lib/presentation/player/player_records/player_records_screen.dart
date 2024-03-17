@@ -16,7 +16,13 @@ class PlayerRecords extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.playHistory),
+        backgroundColor: ColorConstant.primary,
+        title: Row(
+          children: [
+            Image.asset(ImageConstant.puzzle_logo,width: 50,height: 50,),
+            Text(AppStrings.playHistory),
+          ],
+        ),
         leading:  Container(),
         centerTitle: false,
         leadingWidth: 2.0,

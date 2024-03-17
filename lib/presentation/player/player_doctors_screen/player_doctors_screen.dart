@@ -13,7 +13,13 @@ class PlayerDoctorsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.doctors),
+        backgroundColor: ColorConstant.primary,
+        title: Row(
+          children: [
+             Image.asset(ImageConstant.puzzle_logo,width: 50,height: 50,),
+            Text(AppStrings.doctors),
+          ],
+        ),
         leading: Container(),
         actions: [
           IconButton(
@@ -28,7 +34,7 @@ class PlayerDoctorsScreen extends StatelessWidget {
         child: Obx(
               () {
             if (controller.doctors.isEmpty) {
-              return Text('لا توجد أطباء.');
+              return Text('لا توجد اخصائيين.');
             }
             return ListView.builder(
               itemCount: controller.doctors.length,
@@ -113,10 +119,45 @@ class DoctorListItem extends StatelessWidget {
                         height: 300,
                          child: ListView.builder(
                            itemCount: 5,
-                           itemBuilder:(context, index) => ListTile(
+                           itemBuilder:(context, index) {
+                              return ListTile(
                              title: Text('لا تقلق انت في حالة جيدة'),
-                             subtitle: Text(DateFormat.yMMMd('ar').format(DateTime.now())),
-                           ),
+                             subtitle: Row(
+                               children: [
+                                 Text(DateFormat.yMMMd('ar').format(DateTime.now())),
+                                 TextButton(onPressed: (){
+                                   Get.dialog(
+                                     Padding(
+                                       padding: const EdgeInsets.all(8.0),
+                                       child: Dialog(
+                                         child: Padding(
+                                           padding: const EdgeInsets.all(10.0),
+                                           child: Column(
+                                             mainAxisSize: MainAxisSize.min,
+                                             children: [
+                                               Text('اكتب الرد'),
+                                               TextFormField(
+                                                 decoration: InputDecoration(
+                                                   hintText: 'اكتب الرد',
+                                                   suffixIcon: IconButton(
+                                                     onPressed: () {
+                                                       Get.back();
+                                                     },
+                                                     icon: Icon(Icons.send)
+                                                   )
+                                                 ),
+                                               )
+                                             ]
+                                           )
+                                         )
+                                       ),
+                                     )
+                                   );
+                                 }, child: Text('رد')) ,
+                               ],
+                             ),
+                           );
+                           },
                                      ),
                       ),
                       ElevatedButton(onPressed: () {

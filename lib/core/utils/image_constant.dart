@@ -42,6 +42,7 @@ class ImageConstant {
   static String level_item2  = '$imagePath/level_item2.png';
   static String success_kids  = '$imagePath/success_kids.png';
   static String notSuccess_kids  = '$imagePath/sad_kid.jpg';
+  static String puzzle_logo = '$imagePath/puzzle_logo.png';
 
  }
 

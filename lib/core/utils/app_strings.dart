@@ -5,6 +5,7 @@ class AppStrings {
   static String exercise = "التمارين".tr;
   static String exerciseManagement = "إدارة التمارين".tr;
    static String addExercise = "اضافة تمرين".tr;
+   static String profile = "الملف الشخصي".tr;
    static String addlevel = "اضافة مستوى".tr;
   static String title = "العنوان".tr;
   static String levels = "المستويات".tr;
@@ -20,7 +21,8 @@ class AppStrings {
   static String deleteLevel = "حذف المستوى".tr;
   static String gamesManagement = "إدارة الالعاب".tr;
   static String userManagement = "إدارة المستخدمين".tr;
-  static String doctorsManagement = "إدارة الاطباء".tr;
+  static String userType = "نوع المستخدم".tr;
+  static String doctorsManagement = "إدارة الاخصائيين".tr;
   static String perview = "عرض".tr;
   static String question = "السؤال".tr;
   static String imgUrl = "الصورة".tr;
@@ -34,6 +36,7 @@ class AppStrings {
   static const String phone = 'الهاتف: ';
   static const String address = 'العنوان: ';
   static const String age = 'العمر: ';
+  static const String gender = 'الجنس: ';
    static const String score = 'النقاط: ';
   static const String regameCount = 'عدد المحاولات: ';
   static const String gameTime = 'وقت العب: ';
@@ -45,9 +48,9 @@ class AppStrings {
   static const String yearsOfExperience = 'سنوات الخبرة: ';
   static const String password = 'كلمة المرور';
   static const String confirmPassword = 'تأكيد كلمة المرور';
-  static const String addDoctor = 'اضافة طبيب';
+  static const String addDoctor = 'اضافة اخصائي';
   static const String cantEmpty = 'لا يمكن ترك الحقل فارغ';
-  static const String showAllDoctors = 'اظهار جميع الاطباء';
+  static const String showAllDoctors = 'اظهار جميع الاخصائيين';
   static const String loading = 'جاري التحميل';
   static const String retryAgain = 'أعد المحاولة';
   static const String yes = 'نعم';
@@ -56,12 +59,12 @@ class AppStrings {
   static const String successDeleted = 'تم حذف العنصر بنجاح';
   static const String chooseLevel = 'اختر التمرين والمستوي';
   static const String editProfile = 'الملف الشخصى';
-  static const String addChild = 'اضافة طفل';
-  static const String childrenRecords = 'سجل الاطفال';
+  static const String addChild = 'اضافة طالب';
+  static const String childrenRecords = 'سجل الطلاب';
   static const String saveChanges = 'حفظ التغييرات';
-  static const String doctor = 'طبيب';
-  static const String showAllChildren = 'اظهار جميع الاطفال';
-  static const String childernRecordsTitle = 'سجل الاطفال';
+  static const String doctor = 'اخصائي';
+  static const String showAllChildren = 'اظهار جميع الطلاب';
+  static const String childernRecordsTitle = 'سجل الطلاب';
   static const String noChildrenAvailable = 'لا يوجد اطفال متاحين';
   static const String edit  = 'تعديل';
   static const String close =   'اغلاق';
@@ -69,7 +72,8 @@ class AppStrings {
   static const String playHistoryTitle = 'سجل لعب';
   static const String addCommentsTitle = 'اضافة تعليق ل';
   static const String showAllComments = 'اظهار التعليقات';
-  static const String doctors = 'الاطباء';
+  static const String doctors = 'الاخصائيين';
+  static const String certificate = 'الشهادة';
 
   static String playHistoryForChild(String childName) => '$playHistoryTitle $childName';
   static String addCommentsForChild(String childName) => '$addCommentsTitle$childName';
@@ -84,9 +88,10 @@ class AppStrings {
   static const String iHaveAccount = 'لدي حساب بالفعل';
   static const String  iNotHaveAccount = 'ليس لدي حساب';
   static const String  login = 'تسجيل الدخول';
+  static const String  loginOrRegister = 'تسجيل الدخول أو التسجيل';
   static const String  admin = 'المشرف';
-  static const String  player = 'اللاعب';
-  static const String  theDoctor = 'الطبيب';
+  static const String  player = 'الطالب';
+  static const String  theDoctor = 'الاخصائي';
   static const String  chooseUser = 'اختر المستخدم';
 
   static const String chooseLevelOrEx = 'اختر التمرين والمستوي';

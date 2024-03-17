@@ -16,7 +16,12 @@ class ShowAllChildrenScreen extends GetWidget<ChildController> {
     return Scaffold(
       drawer: DoctorDrawer(),
       appBar: AppBar(
-        title: Text(AppStrings.showAllChildren),
+        title: Row(
+          children: [
+            Image.asset(ImageConstant.puzzle_logo,width: 50.0,),
+            Text(AppStrings.showAllChildren),
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: () {

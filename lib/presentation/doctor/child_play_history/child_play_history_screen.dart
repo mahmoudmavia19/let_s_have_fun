@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/constant/constant.dart';
 import '../../../core/utils/app_strings.dart';
+import '../../../core/utils/image_constant.dart';
 import '../../../routes/app_routes.dart';
 import 'controller/play_history_controller.dart';
 
@@ -17,7 +18,12 @@ class ViewPlayHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.playHistoryForChild(childName)),
+        title: Row(
+          children: [
+            Image.asset(ImageConstant.puzzle_logo,width: 50.0,),
+            Text(AppStrings.playHistoryForChild(childName)),
+          ],
+        ),
         leading:  Container(),
         leadingWidth: 2.0,
         actions: [

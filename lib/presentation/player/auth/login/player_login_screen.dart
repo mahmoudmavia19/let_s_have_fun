@@ -5,51 +5,53 @@ import 'package:let_s_have_fun/core/utils/color_constant.dart';
 import 'package:let_s_have_fun/widgets/auth_background.dart';
 
 class PlayerLoginScreen extends StatelessWidget {
+  TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Stack(
-            fit: StackFit.expand,
-            children: [
-              AuthBackground(),
-              Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Text(AppStrings.login,style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white
-                      )),
+        appBar: AppBar(
+          backgroundColor: ColorConstant.primary,
+          title: Text(AppStrings.login),
+        ),
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Image.asset(ImageConstant.puzzle_logo,width: 100,),
+                SizedBox(height: 30.0,),
+                Text(AppStrings.login,style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                )),
 
-                      _buildTextField(AppStrings.email),
-                      _buildTextField(AppStrings.password),
-                       Container(
-                        padding: EdgeInsets.all(8.0),
-                        width:  double.maxFinite,
-                        child: ElevatedButton(onPressed: () {
-                          Get.toNamed(AppRoutes.exercisesScreen);
-                        }, child: Text(AppStrings.login),
-                            style: ElevatedButton.styleFrom( 
-                                backgroundColor: Color(0xFFD27893),
-                                foregroundColor: Colors.white
-                            )),
-                      ),
-                      TextButton(onPressed: () {
-                        Get.toNamed(AppRoutes.playerRegisterScreen);
-                      }, child: Text(AppStrings.iNotHaveAccount))
-                    ],
-                  ),
+                _buildTextField(AppStrings.email,controller: emailController),
+                _buildTextField(AppStrings.password),
+                 Container(
+                  padding: EdgeInsets.all(8.0),
+                  width:  double.maxFinite,
+                  child: ElevatedButton(onPressed: () {
+                    if(emailController.text.contains('admin')){
+                      Get.toNamed(AppRoutes.usersManagementAdmin);
+                    } else if (emailController.text.contains('player')){
+                      Get.toNamed(AppRoutes.exercisesScreen);
+                    } else if (emailController.text.contains('doctor')){
+                      Get.toNamed(AppRoutes.showAllChildrenDoctors);
+                    }else {
+                      Get.toNamed(AppRoutes.exercisesScreen);
+                    }
+                  }, child: Text(AppStrings.login),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:  ColorConstant.btnColor,
+                          foregroundColor: Colors.white
+                      )),
                 ),
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(onPressed: () {
-                  Get.back();
-                }, icon: Icon(Icons.arrow_forward_ios)),
-              ),
-            ]
+                TextButton(onPressed: () {
+                  Get.toNamed(AppRoutes.playerRegisterScreen);
+                }, child: Text(AppStrings.iNotHaveAccount))
+              ],
+            ),
+          ),
         ) ,
       ),
     );
@@ -69,8 +71,7 @@ class PlayerLoginScreen extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: ColorConstant.primary.withOpacity(1),
-            ),
+             ),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: TextFormField(
               controller: controller,

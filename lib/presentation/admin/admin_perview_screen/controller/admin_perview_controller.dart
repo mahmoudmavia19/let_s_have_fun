@@ -1,7 +1,8 @@
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-class GameController extends GetxController {
+import '../../../../core/app_export.dart';
+
+class AdminPerViewController extends GetxController {
   FlutterTts flutterTts = FlutterTts();
 
   @override
@@ -25,6 +26,4 @@ class GameController extends GetxController {
   Future<void> speak(String text) async {
     await flutterTts.speak(text);
   }
-
-
 }

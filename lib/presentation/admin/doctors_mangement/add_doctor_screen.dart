@@ -15,7 +15,12 @@ class AddDoctorScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading:Container(),
-        title: Text(AppStrings.addDoctor),
+        title: Row(
+          children: [
+            Image.asset(ImageConstant.puzzle_logo,width: 50.0,),
+            Text(AppStrings.addDoctor),
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: () {

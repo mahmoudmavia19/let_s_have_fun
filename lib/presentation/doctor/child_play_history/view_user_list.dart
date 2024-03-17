@@ -15,7 +15,12 @@ class ShowChildrenList extends GetWidget<ChildController> {
     return Scaffold(
       drawer: DoctorDrawer(),
       appBar: AppBar(
-          title: Text(AppStrings.childrenRecords),
+          title: Row(
+            children: [
+              Image.asset(ImageConstant.puzzle_logo,width: 50.0,),
+              Text(AppStrings.childrenRecords),
+            ],
+          ),
           actions: [
             IconButton(
               onPressed: () {

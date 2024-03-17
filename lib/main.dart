@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           appBarTheme: AppBarTheme(
-            color: ColorConstant.appColor[0],
+            color: ColorConstant.primary,
             elevation: 1.0,
             centerTitle: true,
             iconTheme: IconThemeData(
@@ -46,7 +46,8 @@ class MyApp extends StatelessWidget {
             color: Colors.white
           ) ,
           floatingActionButtonTheme: FloatingActionButtonThemeData(
-            foregroundColor: Colors.white
+            foregroundColor: Colors.white,
+            backgroundColor: ColorConstant.primary
           ),
           colorScheme: ColorScheme.fromSeed(
               seedColor: ColorConstant.primary,

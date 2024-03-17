@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
-import 'package:let_s_have_fun/widgets/dialogs.dart';
+ import 'package:let_s_have_fun/widgets/dialogs.dart';
 
 import '../../../core/utils/app_strings.dart';
 import '../../../widgets/message_card.dart';
 import '../../admin/exercies_management/model/level.dart';
 import '../../another_screen/play_area.dart';
+import 'controller/game_controller.dart';
 
-class GameScreen extends StatelessWidget {
+class GameScreen extends GetWidget<GameController>{
   Color color;
   Level level;
 
@@ -85,7 +86,9 @@ class GameScreen extends StatelessWidget {
                               widthFactor: 1.46,
                               alignment: Alignment.topLeft,
                               child: Container(
-                                child:MessageCard(level.games?.first.question??''),
+                                child:MessageCard(level.games?.first.question??'',() {
+                                  controller.speak(level.games?.first.question??'');
+                                }),
                               ),
                             ),
                           ],
@@ -116,10 +119,12 @@ class GameScreen extends StatelessWidget {
                                 Get.dialog(
                                     SuccessDialog(title:level.games?.first.successMessage??'',)
                                 );
+                                 controller.speak(level.games?.first.successMessage??'');
                               }else {
                                 Get.dialog(
                                     NotSuccessDialog(title:level.games?.first.successMessage??'',)
                                 );
+                                controller.speak(AppStrings.notSuccess);
                               }
 
                             },
@@ -140,7 +145,16 @@ class GameScreen extends StatelessWidget {
                     )
                   ],
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40.0),
+                child:Align(
+                    alignment:Alignment.topRight,
+                    child: Container(
+                         height: 70,
+                        width: 70,
+                        child: Image.asset(ImageConstant.puzzle_logo))),
+              ),
             ],
           ),
         ),

@@ -13,21 +13,30 @@ class AdminDrawer extends StatelessWidget {
             children: [
               DrawerHeader(
                 child:Center(
-                  child: Text(
-                    AppStrings.appTitle,
-                    style: TextStyle(fontSize: 36.0,fontWeight: FontWeight.bold,color: Colors.white),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(ImageConstant.puzzle_logo,width: 70,height: 70,),
+                      Text(
+                        AppStrings.appTitle,
+                        style: TextStyle(fontSize: 28.0,fontWeight: FontWeight.bold,color: Colors.white),
+                      ),
+                      Text(
+                        AppStrings.admin,
+                      )
+                    ],
                   ),
                 ),
                 decoration: BoxDecoration(
                     color: ColorConstant.primary
                 ),
               ),
-              _tab(AppStrings.exerciseManagement,(){
+          /*    _tab(AppStrings.exerciseManagement,(){
                 Get.toNamed(AppRoutes.exerciseManagementAdmin);
-              }),
-              _tab(AppStrings.gamesManagement,(){
+              }),*/
+           /*   _tab(AppStrings.gamesManagement,(){
                 Get.toNamed(AppRoutes.gamesManagementAdmin);
-              }),
+              }),*/
               _tab(AppStrings.userManagement,(){
                 Get.toNamed(AppRoutes.usersManagementAdmin);
               }),

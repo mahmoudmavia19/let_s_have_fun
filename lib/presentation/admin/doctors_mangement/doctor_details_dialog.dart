@@ -24,6 +24,21 @@ class DoctorDetailsDialog extends StatelessWidget {
             Text('${AppStrings.nationality}: ${doctor.nationality}'),
             Text('${AppStrings.age}: ${doctor.age}'),
             Text('${AppStrings.yearsOfExperience}: ${doctor.yearsOfExperience}'),
+            TextButton(onPressed: (){
+              Get.dialog(
+                Dialog(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset('assets/images/certificate.png'),
+                      TextButton(onPressed: (){
+                        Get.back();
+                      }, child: Text('قبول'))
+                    ],
+                  ),
+                )
+              );
+            }, child: Text(AppStrings.certificate)),
           ],
         ),
       ),

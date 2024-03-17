@@ -64,7 +64,16 @@ class LevelsScreen extends StatelessWidget {
                     )
                   ],
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40.0),
+                child:Align(
+                    alignment:Alignment.topRight,
+                    child: Container(
+                        height: 70,
+                        width: 70,
+                        child: Image.asset(ImageConstant.puzzle_logo))),
+              ),
             ],
           ),
         ),

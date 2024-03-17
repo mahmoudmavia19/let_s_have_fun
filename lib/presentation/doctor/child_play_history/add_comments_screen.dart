@@ -1,8 +1,10 @@
 // add_comments_screen.dart
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/app_strings.dart';
+import '../../../core/utils/image_constant.dart';
 import 'controller/comments_controller.dart';
 
 class AddCommentsScreen extends StatelessWidget {
@@ -15,9 +17,14 @@ class AddCommentsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.addCommentsForChild(childName)),
+        title: Row(
+          children: [
+            Image.asset(ImageConstant.puzzle_logo,width: 45.0,),
+            Expanded(child: Text(AppStrings.addCommentsForChild(childName))),
+          ],
+        ),
         leading:  Container(),
-        leadingWidth: 2.0,
+        leadingWidth: 0,
         actions: [
           IconButton(
             onPressed: () {

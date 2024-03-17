@@ -16,9 +16,10 @@ class DoctorDrawer extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    Image.asset(ImageConstant.puzzle_logo,width: 70,height: 70,),
                     Text(
                       AppStrings.appTitle,
-                      style: TextStyle(fontSize: 36.0,fontWeight: FontWeight.bold,color: Colors.white),
+                      style: TextStyle(fontSize: 28.0,fontWeight: FontWeight.bold,color: Colors.white),
                     ),
                     Text(
                       AppStrings.doctor,
@@ -35,6 +36,12 @@ class DoctorDrawer extends StatelessWidget {
             }),
             _tab(AppStrings.addChild,(){
             Get.toNamed(AppRoutes.showAllChildrenDoctors);
+            }),
+            _tab(AppStrings.exerciseManagement,(){
+              Get.toNamed(AppRoutes.exerciseManagementAdmin);
+            }),
+            _tab(AppStrings.gamesManagement,(){
+              Get.toNamed(AppRoutes.gamesManagementAdmin);
             }),
             _tab(AppStrings.childrenRecords,(){
               Get.toNamed(AppRoutes.viewUserList);

@@ -3,10 +3,10 @@ import 'package:let_s_have_fun/core/constant/constant.dart';
 import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 import 'package:let_s_have_fun/presentation/admin/exercies_management/controller/exercise_controller.dart';
 import 'package:let_s_have_fun/presentation/admin/games_management/controller/games_controller.dart';
+import 'package:let_s_have_fun/widgets/doctor_drawer.dart';
 import 'package:let_s_have_fun/widgets/required_text.dart';
 import '../../../core/app_export.dart';
 import '../../../core/utils/app_strings.dart';
-import '../../../widgets/admin_drawer.dart';
 
 class GamesManagement extends GetWidget<GameController> {
  ExerciseController exerciseController = Get.put(ExerciseController());
@@ -69,9 +69,14 @@ class GamesManagement extends GetWidget<GameController> {
               }
           ),
         ),
-        drawer: AdminDrawer(),
+        drawer: DoctorDrawer(),
         appBar:  AppBar(
-          title: Text(AppStrings.gamesManagement),
+          title: Row(
+            children: [
+              Image.asset(ImageConstant.puzzle_logo,width: 50.0,),
+              Text(AppStrings.gamesManagement),
+            ],
+          ),
           actions: [
             Builder(
               builder: (innterContext) {

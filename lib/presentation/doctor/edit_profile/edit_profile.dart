@@ -47,6 +47,7 @@ class EditProfileScreen extends StatelessWidget {
               _buildTextField(controller.emailController, AppStrings.email, _validateEmail,inputType: TextInputType.emailAddress),
               _buildTextField(controller.phoneController, AppStrings.phone, _validatePhone,inputType: TextInputType.phone),
               _buildTextField(controller.professionController,AppStrings.profession, _validateNotEmpty),
+              _buildTextField(controller.professionController,AppStrings.certificate, _validateNotEmpty),
               _buildTextField(controller.hospitalController,AppStrings.hospital, _validateNotEmpty),
                _buildTextField(controller.nationalityController,AppStrings.nationality, _validateNotEmpty),
               _buildTextField(controller.ageController, AppStrings.age, _validateAge,inputType: TextInputType.number),

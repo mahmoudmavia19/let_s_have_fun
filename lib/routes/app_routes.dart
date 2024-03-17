@@ -1,3 +1,4 @@
+import 'package:let_s_have_fun/presentation/admin/admin_perview_screen/binding/admin_perview_binding.dart';
 import 'package:let_s_have_fun/presentation/another_screen/switch_user_screen.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/add_child_screen.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/binding/child_binding.dart';
@@ -9,13 +10,14 @@ import 'package:let_s_have_fun/presentation/doctor/child_play_history/view_user_
 import 'package:let_s_have_fun/presentation/doctor/edit_profile/edit_profile.dart';
 import 'package:let_s_have_fun/presentation/player/games/binding/game_binding.dart';
 import 'package:let_s_have_fun/presentation/player/games/game_screen.dart';
+import 'package:let_s_have_fun/presentation/player/player_profile/player_profile.dart';
 import 'package:let_s_have_fun/presentation/player/player_records/binding/player_record_binding.dart';
 import 'package:let_s_have_fun/presentation/player/player_records/player_records_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/splash_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:get/get.dart';
 
- import '../presentation/admin/admin_perview_screen.dart';
+ import '../presentation/admin/admin_perview_screen/admin_perview_screen.dart';
 import '../presentation/admin/auth/login/admin_login_screen.dart';
 import '../presentation/admin/doctors_mangement/add_doctor_screen.dart';
 import '../presentation/admin/doctors_mangement/binding/doctors_binding.dart';
@@ -59,6 +61,7 @@ class AppRoutes {
   static const String exercisesScreen = '/player/exercises_screen';
   static const String levelsScreen = '/player/levels_screen';
   static const String gameScreen = '/player/game_screen';
+  static const String playerProfile = '/player/player_profile';
   // auth routes
   static const String playerRegisterScreen = '/auth/player_register_screen';
   static const String playerLoginScreen = '/auth/player_login_screen';
@@ -103,6 +106,7 @@ class AppRoutes {
     GetPage (
       name: perViewAdmin,
       page: () => AdminPerView(level:Get.arguments[0] ,color:Get.arguments[1]),
+      binding: AdminPerViewBinding(),
     ),
     GetPage (
       name: usersManagementAdmin,
@@ -195,6 +199,9 @@ class AppRoutes {
       name: playerDoctorsScreen,
       page: () => PlayerDoctorsScreen(),
       binding: PlayerDoctorsBinding(),
+    ),
+    GetPage(name: playerProfile,
+        page: () => PlayerProfileScreen(),
     )
   ];
 }

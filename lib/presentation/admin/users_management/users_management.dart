@@ -4,6 +4,7 @@ import 'package:let_s_have_fun/core/utils/app_strings.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
 import 'package:let_s_have_fun/presentation/admin/users_management/controller/users_controller.dart';
 import 'package:let_s_have_fun/presentation/admin/users_management/userprofile_admin.dart';
+import '../../../core/utils/image_constant.dart';
 import '../../../widgets/admin_drawer.dart';
 import 'model/user.dart';
 
@@ -40,7 +41,12 @@ class UsersManagementScreen extends GetWidget<UsersController> {
     return Scaffold(
       drawer: AdminDrawer(),
       appBar: AppBar(
-        title: Text(AppStrings.userManagement),
+        title: Row(
+          children: [
+            Image.asset(ImageConstant.puzzle_logo,width: 50.0,),
+            Text(AppStrings.userManagement),
+          ],
+        ),
         centerTitle: true,
         actions: [
           IconButton(

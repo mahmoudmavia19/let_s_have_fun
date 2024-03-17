@@ -4,31 +4,34 @@ import 'package:flutter/material.dart';
 
 class MessageCard extends StatelessWidget {
   String title;
-
-  MessageCard(this.title);
+  void Function()? onTap ;
+  MessageCard(this.title,this.onTap);
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        CustomPaint(
-          size: Size(265, 115),
-          painter: RPSCustomPainter(),
-        ),
-        SizedBox(
-          width: 245,
-          child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(title,style: TextStyle(
-                    fontSize: 24 ,
-                    fontWeight: FontWeight.bold ,
-                    color: Colors.red
-                ),textAlign: TextAlign.center,),
-              ]),
-        )
-      ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          CustomPaint(
+            size: Size(265, 115),
+            painter: RPSCustomPainter(),
+          ),
+          SizedBox(
+            width: 245,
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(title,style: TextStyle(
+                      fontSize: 24 ,
+                      fontWeight: FontWeight.bold ,
+                      color: Colors.red
+                  ),textAlign: TextAlign.center,),
+                ]),
+          )
+        ],
+      ),
     );
   }
 }

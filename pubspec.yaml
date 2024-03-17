@@ -17,6 +17,8 @@ dependencies:
   flutter_arc_speed_dial: ^2.0.1
   intl_utils: ^2.8.7
   pedantic: ^1.11.1
+  file_picker: ^6.2.0
+  flutter_tts: ^3.8.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

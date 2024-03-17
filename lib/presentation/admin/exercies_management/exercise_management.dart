@@ -4,6 +4,7 @@ import 'package:let_s_have_fun/core/utils/app_strings.dart';
 import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 import 'package:let_s_have_fun/widgets/admin_app_bar.dart';
 import 'package:let_s_have_fun/widgets/admin_drawer.dart';
+import 'package:let_s_have_fun/widgets/doctor_drawer.dart';
 import '../../../core/app_export.dart';
 import 'controller/exercise_controller.dart';
 
@@ -12,7 +13,7 @@ class ExerciseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: AdminDrawer(),
+      drawer: DoctorDrawer(),
       appBar: adminAppBar(AppStrings.exerciseManagement),
       body: Obx(
           () => exerciseController.state.value.getScreenWidget(_widget(), () {

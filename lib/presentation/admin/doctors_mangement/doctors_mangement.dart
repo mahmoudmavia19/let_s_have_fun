@@ -18,7 +18,12 @@ class ShowAllDoctorsScreen extends StatelessWidget {
     return Scaffold(
       drawer: AdminDrawer(),
       appBar: AppBar(
-        title: Text(AppStrings.showAllDoctors),
+        title: Row(
+          children: [
+            Image.asset(ImageConstant.puzzle_logo,width: 50.0,),
+            Text(AppStrings.showAllDoctors),
+          ],
+        ),
         centerTitle: true,
          actions: [
           IconButton(
@@ -33,7 +38,7 @@ class ShowAllDoctorsScreen extends StatelessWidget {
         child: Obx(
               () {
             if (controller.doctors.isEmpty) {
-              return Text('لا توجد أطباء.');
+              return Text('لا توجد اخصائيين.');
             }
             return ListView.builder(
               itemCount: controller.doctors.length,
