@@ -1,5 +1,6 @@
 import 'package:let_s_have_fun/presentation/admin/admin_perview_screen/binding/admin_perview_binding.dart';
 import 'package:let_s_have_fun/presentation/another_screen/switch_user_screen.dart';
+import 'package:let_s_have_fun/presentation/doctor/auth/login/binding/doctor_login_binding.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/add_child_screen.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/binding/child_binding.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/child_management.dart';
@@ -8,6 +9,7 @@ import 'package:let_s_have_fun/presentation/doctor/child_play_history/add_commen
 import 'package:let_s_have_fun/presentation/doctor/child_play_history/binding/play_history_binding.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_play_history/view_user_list.dart';
 import 'package:let_s_have_fun/presentation/doctor/edit_profile/edit_profile.dart';
+import 'package:let_s_have_fun/presentation/player/auth/register/binding/player_register_binding.dart';
 import 'package:let_s_have_fun/presentation/player/games/binding/game_binding.dart';
 import 'package:let_s_have_fun/presentation/player/games/game_screen.dart';
 import 'package:let_s_have_fun/presentation/player/player_profile/player_profile.dart';
@@ -19,6 +21,7 @@ import 'package:get/get.dart';
 
  import '../presentation/admin/admin_perview_screen/admin_perview_screen.dart';
 import '../presentation/admin/auth/login/admin_login_screen.dart';
+import '../presentation/admin/auth/login/binding/admin_login_binding.dart';
 import '../presentation/admin/doctors_mangement/add_doctor_screen.dart';
 import '../presentation/admin/doctors_mangement/binding/doctors_binding.dart';
 import '../presentation/admin/doctors_mangement/doctors_mangement.dart';
@@ -173,18 +176,22 @@ class AppRoutes {
     GetPage (
       name: playerRegisterScreen,
       page: () => PlayerRegisterScreen(),
+      binding: PlayerAuthBinding()
     ),
     GetPage (
       name: playerLoginScreen,
       page: () => PlayerLoginScreen(),
+      binding: PlayerAuthBinding()
     ),
     GetPage (
       name: adminLoginScreen,
       page: () => AdminLoginScreen(),
+      binding: AdminLoginBinding()
     ),
     GetPage (
       name: doctorLoginScreen,
       page: () => DoctorLoginScreen(),
+      binding: DoctorLoginBinding()
     ),
     GetPage (
       name: switchUserLoginScreen,

@@ -7,17 +7,19 @@ import '../../../admin/games_management/model/game.dart';
 
 class ExercisesController extends GetxController {
 
+/*
   List<Exercise> exercises = [
     // exercise 1
     Exercise(id: 0, title: 'تمرين تعلم السلوك',color:ColorConstant.appColor[0] ,levels:[
-      Level(id: 0 , title:'تعلم المشاركة', exerciseId: 0, levelScore: 20 , levelNumber: '1', games:[
+      Level(id: 0 , title:'تعلم المشاركة', exerciseId: '0', levelScore: 20 , levelNumber: '1', games:[
         Game(question: 'محمد يريد قطعة من الكعك', imgsAnswer:[
           TestImage.hany ,
           TestImage.chicken,
           TestImage.cack
-        ],id: 0,exerciseId:0,levelId:0,successMessage:'رائع'),
+        ],id: 0,exerciseId:'0',levelId:0,successMessage:'رائع'),
       ]),
     ] )
   ];
+*/
 
 }

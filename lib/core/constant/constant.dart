@@ -13,6 +13,16 @@ String? convertToArabicWords(String number) {
   return arabicNumberWords[number];
 }
 
+void nullVoid(){}
+bool isEmailValid(String email) {
+  return RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+  ).hasMatch(email);
+}
+
+bool isPasswordValid(String password) {
+    return RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(password);
+}
 showConfirmDialog(String title, String content, Function onConfirm) {
   return Get.dialog(AlertDialog(
         title: Text(title),
@@ -67,7 +77,7 @@ String formatDuration(Duration duration, String locale) {
 
 List<Exercise> exercises = [
   // exercise 1
-  Exercise(id: 0, title: 'تمرين تعلم السلوك',color:ColorConstant.appColor[2] ,levels:[
+  /*Exercise(id: 0, title: 'تمرين تعلم السلوك',color:ColorConstant.appColor[2] ,levels:[
     Level(id: 0 , title:'تعلم المشاركة', exerciseId: 0, levelScore: 20 , levelNumber: convertToArabicWords('1'), games:[
       Game(question: 'محمد يريد قطعة من الكعك', imgsAnswer:[
         TestImage.hany ,
@@ -152,5 +162,5 @@ List<Exercise> exercises = [
           currentIndex2: 5,
           successMessage:'رائع لقد اجتزت المستوى الاول بنجاح'),
     ]),
-  ]) ,
+  ]) ,*/
 ];
