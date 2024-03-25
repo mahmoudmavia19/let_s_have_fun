@@ -5,10 +5,15 @@ class AppStrings {
   static String exercise = "التمارين".tr;
   static String exerciseManagement = "إدارة التمارين".tr;
    static String addExercise = "اضافة تمرين".tr;
+   static String noData = "لا يوجد بيانات".tr;
    static String profile = "الملف الشخصي".tr;
    static String addlevel = "اضافة مستوى".tr;
+   static String passwordNotValid = "كلمة المرور غير صحيحة".tr;
   static String title = "العنوان".tr;
+  static String unblockUser = "الغاء حظر المستخدم".tr;
+  static String passwordNotMatch = "كلمة المرور غير متطابقة".tr;
   static String levels = "المستويات".tr;
+  static String accountBlocked = "الحساب محظور".tr;
   static String level = "المستوى".tr;
   static String levelsManagement = "إدارة المستويات".tr;
   static String add = "اضافة".tr;
@@ -98,6 +103,11 @@ class AppStrings {
   static const String chooseLevelOrEx = 'اختر التمرين والمستوي';
   static const String logout = 'تسجيل الخروج';
   static const String playHistory = 'سجل العب';
+  static const String notAdmin = 'ليس لديك صلاحية الدخول';
+  static const String invalidData = 'البيانات غير صحيحة';
+  static const String invalidEmail = 'البريد الالكتروني غير صحيح';
+  static const String successAdded = 'تمت العملية بنجاح';
+  static const String unBlockUser = 'الغاء حظر المستخدم';
   //static const String chooseLevel = 'اختر المستوي';
 
 }

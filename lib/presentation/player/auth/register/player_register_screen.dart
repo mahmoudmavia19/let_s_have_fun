@@ -3,10 +3,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
 import 'package:let_s_have_fun/core/utils/app_strings.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
+import 'package:let_s_have_fun/presentation/player/auth/register/controller/player_register_controller.dart';
 import 'package:let_s_have_fun/widgets/auth_background.dart';
 
-class PlayerRegisterScreen extends StatelessWidget {
-  TextEditingController userTypeController = TextEditingController();
+class PlayerRegisterScreen extends GetWidget<PlayerRegisterController> {
+
   RxBool isDoctor = false.obs;
   @override
   Widget build(BuildContext context) {
@@ -20,50 +22,8 @@ class PlayerRegisterScreen extends StatelessWidget {
             fit: StackFit.expand,
             children: [
              Center(
-              child: SingleChildScrollView(
-                child: Column(
-                    children: [
-                      Text(AppStrings.register,style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-                      )),
-                    _buildTextField(AppStrings.name),
-                    _buildTextField(AppStrings.phone),
-                    _buildTextField(AppStrings.email),
-                      _buildTextField(AppStrings.age),
-                      _buildTextField(AppStrings.gender),
-                      _buildDrawDownField(AppStrings.userType,controller: userTypeController),
-                  Obx(() =>Visibility(
-                        child:  _buildTextField(AppStrings.certificate,onTap: () async{
-                          print('object');
-                          var picker = ImagePicker();
-                          final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-                        },),
-                    visible: isDoctor.value),
-                  ),
-                    _buildTextField(AppStrings.password),
-                    _buildTextField(AppStrings.confirmPassword),
-                    Container(
-                      padding: EdgeInsets.all(8.0),
-                      width:  double.maxFinite,
-                      child: ElevatedButton(onPressed: () {
-                       if(userTypeController.text.contains(AppStrings.theDoctor)){
-                         Get.toNamed(AppRoutes.showAllChildrenDoctors);
-                       } else {
-                         Get.toNamed(AppRoutes.exercisesScreen);
-                       }
-                      }, child: Text(AppStrings.register),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorConstant.btnColor,
-                        foregroundColor: Colors.white
-                      )),
-                    ),
-                      TextButton(onPressed: () {
-                        Get.toNamed(AppRoutes.playerLoginScreen);
-                      }, child: Text(AppStrings.iHaveAccount))
-                  ],
+              child: Obx(()=>SingleChildScrollView(
+                  child:controller.state.value.getScreenWidget(_body(), (){}) ,
                 ),
               ),
             ),
@@ -78,6 +38,55 @@ class PlayerRegisterScreen extends StatelessWidget {
       ),
     );
   }
+
+  _body()=>Form(
+    key: controller.formKey,
+    child: Column(
+      children: [
+        Text(AppStrings.register,style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.white
+        )),
+        _buildTextField(AppStrings.name,controller: controller.nameController),
+        _buildTextField(AppStrings.phone,controller: controller.phoneController),
+        _buildTextField(AppStrings.email,controller: controller.emailController),
+        _buildTextField(AppStrings.age,controller: controller.ageController),
+        _buildDrawDownField(AppStrings.gender,<String>['زكر','انثة'],controller: controller.genderController),
+        _buildDrawDownField(AppStrings.userType,<String>[AppStrings.player,AppStrings.theDoctor],controller: controller.userTypeController),
+        Obx(() =>Visibility(
+            child:  _buildTextField(AppStrings.certificate,onTap: () async{
+              print('object');
+              var picker = ImagePicker();
+              final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+              controller.certificateController.text = image!.path;
+            },controller: controller.certificateController),
+            visible: isDoctor.value),
+        ),
+        _buildTextField(AppStrings.password,controller: controller.passwordController),
+        _buildTextField(AppStrings.confirmPassword,controller: controller.confirmPasswordController),
+        Container(
+          padding: EdgeInsets.all(8.0),
+          width:  double.maxFinite,
+          child: ElevatedButton(onPressed: () {
+            /* if(controller.userTypeController.text.contains(AppStrings.theDoctor)){
+                           Get.toNamed(AppRoutes.showAllChildrenDoctors);
+                         } else {
+                           Get.toNamed(AppRoutes.exercisesScreen);
+                         }*/
+            controller.register() ;
+          }, child: Text(AppStrings.register),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorConstant.btnColor,
+                  foregroundColor: Colors.white
+              )),
+        ),
+        TextButton(onPressed: () {
+          Get.toNamed(AppRoutes.playerLoginScreen);
+        }, child: Text(AppStrings.iHaveAccount))
+      ],
+    ),
+  );
 
   _buildTextField(String title , {TextEditingController? controller,void Function()? onTap }) {
     return Padding(
@@ -105,13 +114,20 @@ class PlayerRegisterScreen extends StatelessWidget {
                  borderRadius: BorderRadius.circular(10.0),
                ),
              ),
+             validator: (value) {
+               if (value == null || value.isEmpty) {
+                 return 'Please enter some text';
+               } else {
+                 return null;
+               }
+             }
             ),
           ),
         ],
       ),
     );
   }
-  _buildDrawDownField(String title , {TextEditingController? controller}) {
+  _buildDrawDownField(String title ,List<String> items , {TextEditingController? controller}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -132,7 +148,14 @@ class PlayerRegisterScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-              items: <String>[AppStrings.player,AppStrings.theDoctor].map((String value) {
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                } else {
+                  return null;
+                }
+              },
+              items: items.map((String value) {
                 return DropdownMenuItem<String>(
                   value: value, child: Text(value),
                 )  ;

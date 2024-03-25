@@ -10,6 +10,7 @@ import '../../core/errors/failure.dart';
 
 abstract class DoctorRemoteDataSource {
   Future<Either<Failure,Doctor>> signIn(String email, String password);
+  Future<Either<Failure,Doctor>> sinUp(Doctor doctor, String password);
   Future<Either<Failure,void>> signOut();
 }
 
@@ -42,6 +43,20 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
       try {
         await apiClient.signOut();
         return Right(nullVoid);
+      } catch (e) {
+        return Left(ErrorHandler.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Doctor>> sinUp(Doctor doctor, String password) async{
+    if(await networkInfo.isConnected()){
+      try {
+        var response =await apiClient.signUp(doctor, password);
+        return Right(response);
       } catch (e) {
         return Left(ErrorHandler.handle(e).failure);
       }

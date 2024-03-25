@@ -12,6 +12,7 @@ class DoctorsController extends GetxController {
   final RxBool isPasswordObscured = true.obs;
 
   final RxList<Doctor> doctors = <Doctor>[].obs;
+  final RxList<Doctor> doctorsNotAccepted = <Doctor>[].obs;
   Rx<FlowState> state = Rx(ContentState());
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -51,6 +52,8 @@ class DoctorsController extends GetxController {
         }, (r) {
           state.value = ContentState();
           doctors.add(doctor);
+
+
           Get.back();
         });
         } else {
@@ -67,7 +70,8 @@ class DoctorsController extends GetxController {
     (await adminRemoteDataSource.getDoctors()).fold((l) {
       state.value = ErrorState(StateRendererType.fullScreenErrorState, l.message);
     }, (r) {
-      doctors.assignAll(r);
+      doctors.value = r.where((element) =>element.accepted).toList();
+      doctorsNotAccepted.value = r.where((element) => !element.accepted).toList();
       state.value = ContentState();
     }
     );
@@ -79,6 +83,16 @@ class DoctorsController extends GetxController {
       state.value = ErrorState(StateRendererType.fullScreenErrorState, l.message);
     }, (r) {
       doctors[doctors.indexOf(doctor)].isBlocked = doctor.isBlocked;
+      state.value = SuccessState(StateRendererType.popupSuccessState, AppStrings.success);
+    });
+  }
+  acceptedDoctor(Doctor doctor)async{
+    doctor.accepted = !doctor.accepted;
+    (await adminRemoteDataSource.updateDoctor(doctor)).fold((l) {
+      state.value = ErrorState(StateRendererType.fullScreenErrorState, l.message);
+    }, (r) {
+      doctors[doctors.indexOf(doctor)].accepted = doctor.accepted;
+      getDoctors();
       state.value = SuccessState(StateRendererType.popupSuccessState, AppStrings.success);
     });
   }

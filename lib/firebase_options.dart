@@ -26,7 +26,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -50,19 +53,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDk7_QKJdlttNI-IFi583V4aqeOoe5WbRc',
-    appId: '1:1007050834003:android:6365201255185bee6c46a6',
-    messagingSenderId: '1007050834003',
-    projectId: 'lets-have-fun-d9a3c',
-    storageBucket: 'lets-have-fun-d9a3c.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDzQMM4rvvhSAN-w30CmL1It0Fqq_uo85U',
-    appId: '1:1007050834003:ios:973720eb6bac075c6c46a6',
-    messagingSenderId: '1007050834003',
-    projectId: 'lets-have-fun-d9a3c',
-    storageBucket: 'lets-have-fun-d9a3c.appspot.com',
-    iosBundleId: 'com.letshavefun.app',
+    apiKey: 'AIzaSyBUNnGaDuegVE6Eez9vlgDGmhbZXciI8js',
+    appId: '1:855364195241:android:999de2870540c89547eab8',
+    messagingSenderId: '855364195241',
+    projectId: 'lets-have-fun-7758c',
+    storageBucket: 'lets-have-fun-7758c.appspot.com',
   );
 }

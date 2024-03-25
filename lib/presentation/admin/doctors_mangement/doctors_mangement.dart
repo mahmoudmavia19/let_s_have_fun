@@ -1,8 +1,6 @@
-// show_all_doctors_screen.dart
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:let_s_have_fun/core/app_export.dart';
+  import 'package:flutter/material.dart';
+ import 'package:let_s_have_fun/core/app_export.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 import 'package:let_s_have_fun/presentation/admin/doctors_mangement/controller/doctors_controller.dart';
 import 'package:let_s_have_fun/presentation/admin/doctors_mangement/doctor_details_dialog.dart';
 import 'package:let_s_have_fun/widgets/admin_drawer.dart';
@@ -39,9 +37,6 @@ class ShowAllDoctorsScreen extends StatelessWidget {
         length: 2,
         child: Obx(
               () {
-            if (controller.doctors.isEmpty) {
-              return Center(child: Text('لا توجد اخصائيين.'));
-            }
             return Column(
               children: [
                 SizedBox(
@@ -52,41 +47,49 @@ class ShowAllDoctorsScreen extends StatelessWidget {
                   ],
                   ),
                 ),
-                Expanded(
-                  child: TabBarView(children: [
-                    ListView.builder(
-                      itemCount: controller.doctors.length,
-                      itemBuilder: (context, index) {
-                        Doctor doctor = controller.doctors[index];
-                        return DoctorListItem(doctor: doctor);
-                      },
-                    ),
-                    ListView.builder(
-                      itemCount: controller.doctors.length,
-                      itemBuilder: (context, index) {
-                        Doctor doctor = controller.doctors[index];
-                        return DoctorListItem(doctor: doctor);
-                      },
-                    )
-                  ]),
-                )
+                controller.state.value.getScreenWidget(_body(), (){})
               ],
             );
           },
         ),
       ),
 
-      floatingActionButton: FloatingActionButton(onPressed:(){
+   /*   floatingActionButton: FloatingActionButton(onPressed:(){
         Get.toNamed(AppRoutes.addDoctorsManagementAdmin);
       },
-      child: Icon(Icons.add),),
+      child: Icon(Icons.add),),*/
     );
   }
+  _body()=>Expanded(
+    child: TabBarView(children: [
+      RefreshIndicator(
+        onRefresh: () async {
+          controller.getDoctors();
+        },
+        child: ListView.builder(
+          itemCount: controller.doctorsNotAccepted.length,
+          itemBuilder: (context, index) {
+            Doctor doctor = controller.doctorsNotAccepted[index];
+            return DoctorListItem(doctor: doctor);
+          },
+        ),
+      ),
+      ListView.builder(
+        itemCount: controller.doctors.length,
+        itemBuilder: (context, index) {
+          Doctor doctor = controller.doctors[index];
+          return DoctorListItem(doctor: doctor);
+        },
+      )
+    ]),
+  );
 }
+
+
 
 class DoctorListItem extends StatelessWidget {
   final Doctor doctor;
-
+  DoctorsController controller = Get.put(DoctorsController());
   DoctorListItem({required this.doctor});
 
   @override
@@ -94,7 +97,10 @@ class DoctorListItem extends StatelessWidget {
     return Card(
       child: ListTile(
         onTap: () {
-          Get.dialog(DoctorDetailsDialog(doctor: doctor));
+          Get.dialog(DoctorDetailsDialog(doctor: doctor,onPressed: () {
+            controller.blockDoctor(doctor);
+            Get.back();
+          },));
         },
         title: Text(doctor.name??'', style: TextStyle(color: ColorConstant.primary, fontSize: 20.0)),
         subtitle: Column(
@@ -107,6 +113,7 @@ class DoctorListItem extends StatelessWidget {
         ),
         leading: CircleAvatar(
           radius:30,
+          child: Icon(Icons.medical_services_outlined,color:Colors.white ,),
         ),
         trailing: Icon(Icons.arrow_forward_ios),
       ),

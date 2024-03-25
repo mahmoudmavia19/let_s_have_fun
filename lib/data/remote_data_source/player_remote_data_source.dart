@@ -5,13 +5,14 @@ import 'package:let_s_have_fun/data/apiClient/admin_api_client.dart';
 import 'package:let_s_have_fun/data/apiClient/doctor_api_client.dart';
 import 'package:let_s_have_fun/data/apiClient/player_api_client.dart';
 import 'package:let_s_have_fun/data/models/player.dart';
+import 'package:let_s_have_fun/data/models/role.dart';
 import 'package:let_s_have_fun/presentation/admin/doctors_mangement/model/doctor.dart';
 
 import '../../core/constant/constant.dart';
 import '../../core/errors/failure.dart';
 
 abstract class PlayerRemoteDataSource {
-  Future<Either<Failure,Player>> signIn(String email, String password);
+  Future<Either<Failure,Role>> signIn(String email, String password);
   Future<Either<Failure,Player>> signUp(Player player, String password);
   Future<Either<Failure,void>> signOut();
 }
@@ -25,7 +26,7 @@ class PlayerRemoteDataSourceImpl implements PlayerRemoteDataSource {
   PlayerRemoteDataSourceImpl(this.apiClient, this.networkInfo);
 
   @override
-  Future<Either<Failure, Player>> signIn(String email, String password) async{
+  Future<Either<Failure, Role>> signIn(String email, String password) async{
     if(await networkInfo.isConnected()){
       try {
         var response = await apiClient.signIn(email, password);

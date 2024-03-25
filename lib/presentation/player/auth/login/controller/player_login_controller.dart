@@ -21,7 +21,17 @@ class PlayerLoginController extends GetxController {
         state.value = ErrorState(StateRendererType.popupErrorState,l.message);
       }, (r) {
         state.value = ContentState();
-        Get.offAllNamed(AppRoutes.exercisesScreen);
+        if(r.isBlocked){
+          state.value = ErrorState(StateRendererType.popupErrorState, AppStrings.accountBlocked);
+        }else {
+          if (r.role == 'admin') {
+            Get.offAllNamed(AppRoutes.usersManagementAdmin);
+          } else if (r.role == 'doctor') {
+            Get.offAllNamed(AppRoutes.showAllChildrenDoctors);
+          } else {
+            Get.offAllNamed(AppRoutes.exercisesScreen);
+          }
+        }
       });
     } else {
       state.value = ErrorState(StateRendererType.popupErrorState, AppStrings.invalidData);

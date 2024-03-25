@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
 import 'package:let_s_have_fun/core/utils/app_strings.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 import 'package:let_s_have_fun/widgets/auth_background.dart';
 
-class PlayerLoginScreen extends StatelessWidget {
-  TextEditingController emailController = TextEditingController();
-  @override
+import 'controller/player_login_controller.dart';
+
+class PlayerLoginScreen extends GetWidget<PlayerLoginController> {
+   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -15,47 +17,53 @@ class PlayerLoginScreen extends StatelessWidget {
           title: Text(AppStrings.login),
         ),
         body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Image.asset(ImageConstant.puzzle_logo,width: 100,),
-                SizedBox(height: 30.0,),
-                Text(AppStrings.login,style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                )),
-
-                _buildTextField(AppStrings.email,controller: emailController),
-                _buildTextField(AppStrings.password),
-                 Container(
-                  padding: EdgeInsets.all(8.0),
-                  width:  double.maxFinite,
-                  child: ElevatedButton(onPressed: () {
-                    if(emailController.text.contains('admin')){
-                      Get.toNamed(AppRoutes.usersManagementAdmin);
-                    } else if (emailController.text.contains('player')){
-                      Get.toNamed(AppRoutes.exercisesScreen);
-                    } else if (emailController.text.contains('doctor')){
-                      Get.toNamed(AppRoutes.showAllChildrenDoctors);
-                    }else {
-                      Get.toNamed(AppRoutes.exercisesScreen);
-                    }
-                  }, child: Text(AppStrings.login),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor:  ColorConstant.btnColor,
-                          foregroundColor: Colors.white
-                      )),
-                ),
-                TextButton(onPressed: () {
-                  Get.toNamed(AppRoutes.playerRegisterScreen);
-                }, child: Text(AppStrings.iNotHaveAccount))
-              ],
+          child: Obx(()=>SingleChildScrollView(
+              child: controller.state.value.getScreenWidget(_body(), (){}),
             ),
           ),
         ) ,
       ),
     );
   }
+  _body()=>Form(
+    key: controller.formKey,
+    child: Column(
+      children: [
+        Image.asset(ImageConstant.puzzle_logo,width: 100,),
+        SizedBox(height: 30.0,),
+        Text(AppStrings.login,style: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+        )),
+
+        _buildTextField(AppStrings.email,controller: controller.emailController),
+        _buildTextField(AppStrings.password,controller:  controller.passwordController),
+        Container(
+          padding: EdgeInsets.all(8.0),
+          width:  double.maxFinite,
+          child: ElevatedButton(onPressed: () {
+            /*    if(emailController.text.contains('admin')){
+                        Get.toNamed(AppRoutes.usersManagementAdmin);
+                      } else if (emailController.text.contains('player')){
+                        Get.toNamed(AppRoutes.exercisesScreen);
+                      } else if (emailController.text.contains('doctor')){
+                        Get.toNamed(AppRoutes.showAllChildrenDoctors);
+                      }else {
+                        Get.toNamed(AppRoutes.exercisesScreen);
+                      }*/
+            controller.login() ;
+          }, child: Text(AppStrings.login),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor:  ColorConstant.btnColor,
+                  foregroundColor: Colors.white
+              )),
+        ),
+        TextButton(onPressed: () {
+          Get.toNamed(AppRoutes.playerRegisterScreen);
+        }, child: Text(AppStrings.iNotHaveAccount))
+      ],
+    ),
+  );
 
   _buildTextField(String title , {TextEditingController? controller}) {
     return Padding(
@@ -81,6 +89,12 @@ class PlayerLoginScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
             ),
           ),
         ],

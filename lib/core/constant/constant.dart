@@ -77,7 +77,7 @@ String formatDuration(Duration duration, String locale) {
 
 List<Exercise> exercises = [
   // exercise 1
-  /*Exercise(id: 0, title: 'تمرين تعلم السلوك',color:ColorConstant.appColor[2] ,levels:[
+  Exercise(id: 0, title: 'تمرين تعلم السلوك',color:ColorConstant.appColor[2] ,levels:[
     Level(id: 0 , title:'تعلم المشاركة', exerciseId: 0, levelScore: 20 , levelNumber: convertToArabicWords('1'), games:[
       Game(question: 'محمد يريد قطعة من الكعك', imgsAnswer:[
         TestImage.hany ,
@@ -162,5 +162,5 @@ List<Exercise> exercises = [
           currentIndex2: 5,
           successMessage:'رائع لقد اجتزت المستوى الاول بنجاح'),
     ]),
-  ]) ,*/
+  ]) ,
 ];

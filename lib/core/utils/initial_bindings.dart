@@ -24,7 +24,7 @@ class InitialBindings extends Bindings {
     Get.put(NetworkInfo(connectivity));
     Get.put(AdminApiClient(Get.find(), Get.find(), Get.find()));
     Get.put(AdminRemoteDataSourceImpl(Get.find(), Get.find()));
-    Get.put(DoctorApiClient(Get.find(),Get.find()));
+    Get.put(DoctorApiClient(Get.find(),Get.find(), Get.find()));
     Get.put(DoctorRemoteDataSourceImpl(Get.find(), Get.find()));
     Get.put(PlayerApiClient(Get.find(), Get.find()));
     Get.put(PlayerRemoteDataSourceImpl(Get.find(), Get.find()));

@@ -7,10 +7,13 @@ class Doctor {
   String? profession;
   String? hospital;
   String? photo;
+  String? certificate ;
   String? nationality;
   int? age;
   int? yearsOfExperience;
   bool  isBlocked;
+  bool  accepted = false;
+
 
   Doctor({
     this.uid,
@@ -23,7 +26,9 @@ class Doctor {
     this.nationality,
     this.age,
     this.yearsOfExperience,
-    this.isBlocked = false
+    this.isBlocked = false,
+    this.certificate ,
+    this.accepted = false
   });
 
   // Serialize to JSON
@@ -39,7 +44,9 @@ class Doctor {
       'nationality': nationality,
       'age': age,
       'yearsOfExperience': yearsOfExperience,
-      'isBlocked': isBlocked
+      'isBlocked': isBlocked,
+      'certificate': certificate,
+      'accepted': accepted
     };
   }
 
@@ -56,7 +63,9 @@ class Doctor {
       nationality: json['nationality'],
       age: json['age'],
       yearsOfExperience: json['yearsOfExperience'],
-      isBlocked: json['isBlocked']??false
+      isBlocked: json['isBlocked']??false,
+      certificate: json['certificate'],
+      accepted: json['accepted']??false
     );
   }
 }
