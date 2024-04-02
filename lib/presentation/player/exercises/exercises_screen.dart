@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
-import 'package:let_s_have_fun/core/constant/constant.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
-import 'package:let_s_have_fun/presentation/admin/exercies_management/model/level.dart';
-import 'package:let_s_have_fun/presentation/another_screen/play_area.dart';
-import 'package:let_s_have_fun/widgets/exercises_item.dart';
-
-import '../../../core/utils/app_strings.dart';
- import '../../../widgets/exercises_item2.dart';
+ import 'package:let_s_have_fun/presentation/another_screen/play_area.dart';
+ import '../../../core/utils/app_strings.dart';
+import '../../../widgets/exercises_item.dart';
+import '../../../widgets/exercises_item2.dart';
+import '../../doctor/exercies_management/model/level.dart';
+import 'controller/exercises_controller.dart';
 
 class ExercisesScreen extends StatefulWidget {
   @override
@@ -18,9 +18,9 @@ class ExercisesScreen extends StatefulWidget {
 class _ExercisesScreenState extends State<ExercisesScreen> {
   var color = ColorConstant.primary;
 
-  var level = Level(id: 0 , title:' title', exerciseId: 0, levelScore: 0);
-
   var logo = true.obs ;
+
+  ExercisesController controller = Get.find<ExercisesController>();
   @override
   void initState() {
     Timer(Duration(seconds: 1), () {
@@ -92,7 +92,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                                 padding: const EdgeInsets.only(left: 20.0),
                                 child: GestureDetector(
                                   onTap:() {
-                                    Get.toNamed(AppRoutes.playerRecords) ;
+                                    Get.toNamed(AppRoutes.playerRecords,) ;
                                   },
                                   child: CircleAvatar(
                                     radius: 30,
@@ -108,12 +108,16 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                         ],
                       ),
                     ),
-                     Expanded(
-                      child: ListView.builder(
-                        itemCount:exercises.length ,
-                          itemBuilder:(context, index) => index%2==0?ExercisesItem2(exercises[index]):
-                          ExercisesItem(exercises[index]), )
-                    )
+                     Obx(
+                       ()=>Expanded(
+                        child: ListView.builder(
+                          itemCount:controller.exercises.length ,
+                            itemBuilder:(context, index) => index%2==0?ExercisesItem2(controller.exercises[index],
+                            isOpen: controller.playerController.player.score!>=controller.totalLevelScore(index)||index==0,):
+                            ExercisesItem(controller.exercises[index]
+                            ,isOpen: controller.playerController.player.score!>=controller.totalLevelScore(index),), )
+                                           ),
+                     )
                   ],
                 ),
               ),

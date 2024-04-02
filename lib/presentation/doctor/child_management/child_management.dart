@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/child_user_dialog.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/controller/child_controller.dart';
 import 'package:let_s_have_fun/widgets/doctor_drawer.dart';
 
 import '../../../core/utils/app_strings.dart';
 import '../../../core/utils/color_constant.dart';
+import '../../../data/models/player.dart';
 import '../../admin/users_management/model/user.dart';
 
 class ShowAllChildrenScreen extends GetWidget<ChildController> {
@@ -34,19 +36,9 @@ class ShowAllChildrenScreen extends GetWidget<ChildController> {
       body: Center(
         child: Obx(
           () {
-            final List<User> children = controller.users;
-
-            if (children.isEmpty) {
-              return Text(AppStrings.noChildrenAvailable);
-            }
-
-            return ListView.builder(
-              itemCount: children.length,
-              itemBuilder: (context, index) {
-                User child = children[index];
-                return UserListItem(user: child, index: index);
-              },
-            );
+             return  controller.state.value.getScreenWidget(_body(), (){
+               controller.getAllChildren();
+             });
           },
         ),
       ),
@@ -58,10 +50,24 @@ class ShowAllChildrenScreen extends GetWidget<ChildController> {
       ),
     );
   }
+
+  _body()=>RefreshIndicator(
+    onRefresh: () async {
+      controller.getAllChildren();
+    },
+    child: ListView.builder(
+      itemCount:  controller.users.length,
+      itemBuilder: (context, index) {
+        Player child =  controller.users[index];
+        return UserListItem(user: child, index: index);
+      },
+    ),
+  );
 }
 
+
 class UserListItem extends StatelessWidget {
-  final User user;
+  final Player user;
   final int index;
 
   UserListItem({required this.user, required this.index});
@@ -70,9 +76,9 @@ class UserListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(user.name,
+        title: Text(user.name??'',
             style: TextStyle(color: ColorConstant.primary, fontSize: 20.0)),
-        subtitle: Text('${AppStrings.age}: ${user.age}'),
+        subtitle: Text('${AppStrings.age}: ${user.email??''}'),
         trailing: Icon(Icons.arrow_forward_ios),
         onTap: () {
           // Show the UserDetailsDialog when the ListTile is tapped

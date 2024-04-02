@@ -46,6 +46,9 @@ class DoctorDrawer extends StatelessWidget {
             _tab(AppStrings.childrenRecords,(){
               Get.toNamed(AppRoutes.viewUserList);
             }),
+            _tab(AppStrings.logout,(){
+              Get.offAllNamed(AppRoutes.switchUserLoginScreen);
+            }),
           ]
       ),
     );

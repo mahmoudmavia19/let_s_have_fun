@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
- import 'package:let_s_have_fun/widgets/dialogs.dart';
-
+import 'package:let_s_have_fun/presentation/another_screen/play_area.dart';
+import 'package:let_s_have_fun/presentation/doctor/exercies_management/model/level.dart';
+import 'package:let_s_have_fun/widgets/message_card.dart';
 import '../../../core/utils/app_strings.dart';
-import '../../../widgets/message_card.dart';
-import '../../admin/exercies_management/model/level.dart';
-import '../../another_screen/play_area.dart';
+import '../../../widgets/dialogs.dart';
 import 'controller/game_controller.dart';
 
-class GameScreen extends GetWidget<GameController>{
-  Color color;
-  Level level;
 
-  GameScreen({required this.color,required this.level});
+class GameScreen extends GetWidget<GameController>{
+  Level level;
+  Color color ;
+
+  GameScreen({required this.level,required this.color}){
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,37 +37,16 @@ class GameScreen extends GetWidget<GameController>{
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                children: [
-                                  Text(level.title,style: TextStyle(
-                                      fontSize: 24 ,
-                                      fontWeight: FontWeight.bold ,
-                                      color: Colors.white
-                                  ), ),
-                                  Text(AppStrings.level +' '+(level.levelNumber??''),style: TextStyle(
-                                      fontSize: 14 ,
-                                      fontWeight: FontWeight.bold ,
-                                      color: Colors.white
-                                  ),),
-                                ],
-                              ),
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  child: IconButton(onPressed: (){
-                                    Get.back();
-                                    Get.back();
-                                  }, icon: Icon(Icons.home,color: Colors.red,)),
-                                ),
-                              ),
-                            ],
-                          ),
+                          Text(level.title,style: TextStyle(
+                              fontSize: 24 ,
+                              fontWeight: FontWeight.bold ,
+                              color: Colors.white
+                          ), ),
+                          Text(AppStrings.level +' '+(level.levelNumber??''),style: TextStyle(
+                              fontSize: 14 ,
+                              fontWeight: FontWeight.bold ,
+                              color: Colors.white
+                          ),),
                         ],
                       ),
                     ),
@@ -87,7 +68,7 @@ class GameScreen extends GetWidget<GameController>{
                               alignment: Alignment.topLeft,
                               child: Container(
                                 child:MessageCard(level.games?.first.question??'',() {
-                                  controller.speak(level.games?.first.question??'');
+                                  controller.speak(level.games?.first.question??'') ;
                                 }),
                               ),
                             ),
@@ -95,9 +76,9 @@ class GameScreen extends GetWidget<GameController>{
                         )
                     ),
                     if(level.games?.first.img?.isNotEmpty??false)
-                    Image.asset(level.games!.first.img!,width: 200,height: 200,
-                    fit: BoxFit.contain,
-                    ),
+                      Image.network(level.games!.first.img!,width: 200,height: 200,
+                        fit: BoxFit.contain,
+                      ),
                     if(level.games?.first.img?.isEmpty??true)
                       SizedBox(height: 20,),
                     Align(
@@ -110,51 +91,45 @@ class GameScreen extends GetWidget<GameController>{
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
                         ),
-                        itemCount:level.games?.first.imgsAnswer?.length,// level.game?.imgsAnswer?.length,
+                        itemCount:level.games?.first.imgsAnswer.length,// level.game?.imgsAnswer?.length,
                         itemBuilder: (context, index) {
-                          //return Image.asset(level.game?.imgsAnswer?[index]??'');
-                          return  InkWell(
-                            onTap: () {
-                              if(level.games!.first.currentIndex==index || level.games!.first.currentIndex2==index){
-                                Get.dialog(
-                                    SuccessDialog(title:level.games?.first.successMessage??'',)
-                                );
-                                 controller.speak(level.games?.first.successMessage??'');
-                              }else {
-                                Get.dialog(
-                                    NotSuccessDialog(title:level.games?.first.successMessage??'',)
-                                );
-                                controller.speak(AppStrings.notSuccess);
-                              }
+                           if(level.games?.first.imgsAnswer[index].url!=null)
+                            return  InkWell(
+                              onTap: () {
+                                if(level.games?.first.imgsAnswer[index].isSelected??false){
+                                  controller.speak(level.games?.first.successMessage??'');
+                                  Get.dialog(
+                                      SuccessDialog(title:level.games?.first.successMessage??'',)
+                                  );
+                                  controller.playGame(true);
+                                }else {
+                                  Get.dialog(
+                                      NotSuccessDialog(title:level.games?.first.successMessage??'',)
+                                  );
+                                  controller.speak(AppStrings.notSuccess,);
+                                  controller.playGame(false);
+                                }
 
-                            },
-                            child: Container(
-                              width: 97,
-                              height: 90,
-                              padding: EdgeInsets.all(2),
-                              child: Image.asset(level.games!.first.imgsAnswer![index],),
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFE3E3E3),
-                                  borderRadius: BorderRadius.circular(15.0)
+                              },
+                              child: Container(
+                                width: 97,
+                                height: 90,
+                                padding: EdgeInsets.all(2),
+                                child: Image.network(level.games!.first.imgsAnswer[index].url!,),
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFE3E3E3),
+                                    borderRadius: BorderRadius.circular(15.0)
+                                ),
+
                               ),
-
-                            ),
-                          );
+                            );
+                          return Container();
                         },
                       ),
                     )
                   ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child:Align(
-                    alignment:Alignment.topRight,
-                    child: Container(
-                         height: 70,
-                        width: 70,
-                        child: Image.asset(ImageConstant.puzzle_logo))),
-              ),
+              )
             ],
           ),
         ),

@@ -1,39 +1,39 @@
-import 'package:let_s_have_fun/presentation/admin/admin_perview_screen/binding/admin_perview_binding.dart';
+ import 'package:let_s_have_fun/data/models/player.dart';
 import 'package:let_s_have_fun/presentation/another_screen/switch_user_screen.dart';
 import 'package:let_s_have_fun/presentation/doctor/auth/login/binding/doctor_login_binding.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/add_child_screen.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/binding/child_binding.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/child_management.dart';
-import 'package:let_s_have_fun/presentation/doctor/child_management/controller/child_controller.dart';
-import 'package:let_s_have_fun/presentation/doctor/child_play_history/add_comments_screen.dart';
+ import 'package:let_s_have_fun/presentation/doctor/child_play_history/add_comments_screen.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_play_history/binding/play_history_binding.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_play_history/view_user_list.dart';
 import 'package:let_s_have_fun/presentation/doctor/edit_profile/edit_profile.dart';
 import 'package:let_s_have_fun/presentation/player/auth/register/binding/player_register_binding.dart';
 import 'package:let_s_have_fun/presentation/player/games/binding/game_binding.dart';
 import 'package:let_s_have_fun/presentation/player/games/game_screen.dart';
+import 'package:let_s_have_fun/presentation/player/player_profile/binding/player_profile_binding.dart';
 import 'package:let_s_have_fun/presentation/player/player_profile/player_profile.dart';
 import 'package:let_s_have_fun/presentation/player/player_records/binding/player_record_binding.dart';
 import 'package:let_s_have_fun/presentation/player/player_records/player_records_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/splash_screen.dart';
 import 'package:let_s_have_fun/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:get/get.dart';
-
- import '../presentation/admin/admin_perview_screen/admin_perview_screen.dart';
 import '../presentation/admin/auth/login/admin_login_screen.dart';
 import '../presentation/admin/auth/login/binding/admin_login_binding.dart';
 import '../presentation/admin/doctors_mangement/add_doctor_screen.dart';
 import '../presentation/admin/doctors_mangement/binding/doctors_binding.dart';
 import '../presentation/admin/doctors_mangement/doctors_mangement.dart';
-import '../presentation/admin/exercies_management/binding/exercises_binding.dart';
-import '../presentation/admin/exercies_management/exercise_management.dart';
-import '../presentation/admin/games_management/binding/games_binding.dart';
-import '../presentation/admin/games_management/games_management.dart';
 import '../presentation/admin/users_management/binding/users_binding.dart';
 import '../presentation/admin/users_management/users_management.dart';
+import '../presentation/doctor/perview_screen/perview_screen.dart';
+import '../presentation/doctor/perview_screen/binding/admin_perview_binding.dart';
 import '../presentation/doctor/auth/login/doctor_login_screen.dart';
 import '../presentation/doctor/child_play_history/binding/commets_binding.dart';
 import '../presentation/doctor/child_play_history/child_play_history_screen.dart';
+import '../presentation/doctor/exercies_management/binding/exercises_binding.dart';
+import '../presentation/doctor/exercies_management/exercise_management.dart';
+import '../presentation/doctor/games_management/binding/games_binding.dart';
+import '../presentation/doctor/games_management/games_management.dart';
 import '../presentation/player/auth/login/player_login_screen.dart';
 import '../presentation/player/auth/register/player_register_screen.dart';
 import '../presentation/player/exercises/binding/exercises_binding.dart';
@@ -143,14 +143,14 @@ class AppRoutes {
     ),
     GetPage (
       name: playHistoryScreen,
-      page: () => ViewPlayHistoryScreen(childName:Get.arguments,),
+      page: () => ViewPlayHistoryScreen(childName:(Get.arguments as Player).name!,),
       bindings:[
         PlayHistoryBinding(),
       ]
     ),
     GetPage (
       name: commentsScreen,
-      page: () => AddCommentsScreen(childName: Get.arguments),
+      page: () => AddCommentsScreen(childName: (Get.arguments as Player).name!,),
       binding: CommentsBinding(),
     ),
     GetPage (
@@ -161,7 +161,8 @@ class AppRoutes {
     GetPage (
       name: exercisesScreen,
       page: () => ExercisesScreen(),
-      binding: ExercisesBinding(),
+      bindings: [ExercisesBinding(),
+      PlayerProfileBinding()],
     ),
     GetPage (
       name: levelsScreen,
@@ -209,6 +210,7 @@ class AppRoutes {
     ),
     GetPage(name: playerProfile,
         page: () => PlayerProfileScreen(),
+        binding: PlayerProfileBinding()
     )
   ];
 }

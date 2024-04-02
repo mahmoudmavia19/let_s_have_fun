@@ -1,21 +1,20 @@
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
-import 'package:let_s_have_fun/presentation/admin/exercies_management/model/Exercise.dart';
 
-import '../core/utils/image_constant.dart';
+import '../presentation/doctor/exercies_management/model/Exercise.dart';
+
 
 class ExercisesItem2 extends StatelessWidget {
   Exercise exercise;
-
-  ExercisesItem2(this.exercise);
+  bool isOpen = false;
+  ExercisesItem2(this.exercise, {this.isOpen = false});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap:isOpen? () {
         Get.toNamed(AppRoutes.levelsScreen,arguments: [exercise]);
-      },
+      }:null,
       child: Container(
         height: 160,
          width: 396,
@@ -54,6 +53,13 @@ class ExercisesItem2 extends StatelessWidget {
                       ),textAlign: TextAlign.center,),
                     ),
                   ),
+                  Visibility(
+                    visible: !isOpen,
+                    child: Positioned(
+                        bottom: 2,
+                        left: 0,
+                        child: Icon(Icons.lock)),
+                  )
                 ],
               ),
             )

@@ -1,16 +1,35 @@
 // play_history.dart
 class PlayHistory {
-  final int childId;
-  final int levelNumber;
-  final int levelPoints;
-  final int stageNumber;
-  final Duration playingTime;
+    String? childId;
+    int? levelNumber;
+    int? levelPoints;
+    int? stageNumber;
+    Duration? playingTime;
 
   PlayHistory({
-    required this.childId,
-    required this.levelNumber,
-    required this.levelPoints,
-    required this.stageNumber,
-    required this.playingTime,
+     this.childId,
+     this.levelNumber,
+     this.levelPoints,
+     this.stageNumber,
+     this.playingTime,
   });
+
+    PlayHistory.fromJson(Map<String, dynamic> json) {
+    childId = json['childId'];
+    levelNumber = json['levelNumber'];
+    levelPoints = json['levelPoints'];
+    stageNumber = json['stageNumber'];
+    playingTime = json['playingTime'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['childId'] = this.childId;
+    data['levelNumber'] = this.levelNumber;
+    data['levelPoints'] = this.levelPoints;
+    data['stageNumber'] = this.stageNumber;
+    data['playingTime'] = this.playingTime;
+    return data;
+  }
+
 }

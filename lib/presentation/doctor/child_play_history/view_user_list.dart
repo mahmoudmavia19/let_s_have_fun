@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
 import 'package:let_s_have_fun/core/constant/constant.dart';
+import 'package:let_s_have_fun/data/models/player.dart';
 import 'package:let_s_have_fun/presentation/doctor/child_management/controller/child_controller.dart';
 import 'package:let_s_have_fun/widgets/doctor_drawer.dart';
 
@@ -33,7 +34,7 @@ class ShowChildrenList extends GetWidget<ChildController> {
       body: Center(
         child: Obx(
               () {
-            final List<User> children = controller.users;
+            final List<Player> children = controller.users;
 
             if (children.isEmpty) {
               return Text(AppStrings.noChildrenAvailable);
@@ -42,7 +43,7 @@ class ShowChildrenList extends GetWidget<ChildController> {
             return ListView.builder(
               itemCount: children.length,
               itemBuilder: (context, index) {
-                User child = children[index];
+                Player child = children[index];
                 return UserListItem(user: child, index: index);
               },
             );
@@ -55,7 +56,7 @@ class ShowChildrenList extends GetWidget<ChildController> {
 }
 
 class UserListItem extends StatelessWidget {
-  final User user;
+  final Player user;
   final int index;
 
   UserListItem({required this.user, required this.index});
@@ -64,12 +65,12 @@ class UserListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(user.name,
+        title: Text(user.name??'',
             style: TextStyle(color: ColorConstant.primary, fontSize: 20.0)),
-        subtitle: Text('${AppStrings.level}: ${convertToArabicWords(user.level.toString())}'),
+        subtitle: Text('${AppStrings.email}: ${user.email}'),
         trailing: Icon(Icons.arrow_forward_ios),
         onTap: () {
-             Get.toNamed(AppRoutes.playHistoryScreen, arguments: user.name);
+             Get.toNamed(AppRoutes.playHistoryScreen, arguments: user);
         },
       ),
     );

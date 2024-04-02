@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:let_s_have_fun/core/app_export.dart';
+ import 'package:let_s_have_fun/core/app_export.dart';
 import 'package:let_s_have_fun/core/utils/app_strings.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
-import 'package:let_s_have_fun/presentation/admin/exercies_management/model/level.dart';
-
-import 'dialogs.dart';
-
+import '../presentation/doctor/exercies_management/model/level.dart';
 class LevelItem extends StatelessWidget {
   Level level ;
   Color color;

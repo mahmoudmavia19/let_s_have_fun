@@ -6,6 +6,7 @@ class Player {
   String? email;
   String? phone;
   String? address;
+  String? gender;
   int? age;
   int? level;
   int? score;
@@ -26,6 +27,7 @@ class Player {
     this.regameCount,
     this.gameTime,
     this.image,
+    this.gender,
     this.isBlocked = false
   });
 
@@ -39,6 +41,7 @@ class Player {
       'address': address,
       'age': age,
       'level': level,
+      'gender': gender,
       'score': score,
       'regameCount': regameCount,
       'gameTime': gameTime?.inSeconds??0, // Convert Duration to seconds
@@ -55,8 +58,9 @@ class Player {
       phone: json['phone'],
       address: json['address'],
       age: json['age'],
+      gender: json['gender'],
       level: json['level'],
-      score: json['score'],
+      score: json['score']??0,
       regameCount: json['regameCount'],
       gameTime: Duration(seconds: json['gameTime']??0),
       image: json['image'],

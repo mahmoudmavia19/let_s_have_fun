@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/app_export.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
+import 'package:let_s_have_fun/presentation/player/player_profile/controller/player_controller.dart';
 import '../../../core/utils/app_strings.dart';
 import '../../../core/utils/color_constant.dart';
 
-class PlayerProfileScreen extends StatelessWidget {
+class PlayerProfileScreen extends GetWidget<PlayerController> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -18,37 +20,42 @@ class PlayerProfileScreen extends StatelessWidget {
         centerTitle: true,
       ) ,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(AppStrings.register,style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.white
-            )),
-            _buildTextField(AppStrings.name),
-            _buildTextField(AppStrings.phone),
-            _buildTextField(AppStrings.email),
-            _buildTextField(AppStrings.age),
-            _buildTextField(AppStrings.gender),
-
-            Container(
-              padding: EdgeInsets.all(8.0),
-              width:  double.maxFinite,
-              child: ElevatedButton(onPressed: () {
-
-              }, child: Text(AppStrings.saveChanges),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorConstant.btnColor,
-                      foregroundColor: Colors.white
-                  )),
-            ),
-           ],
-        ),
+        child: Obx(()=>controller.flowState.value.getScreenWidget(_body(), (){}))
       ) ,
     );
   }
 
-  _buildTextField(String title , {TextEditingController? controller,void Function()? onTap }) {
+  _body()=>Form(
+    key: controller.formKey,
+    child: Column(
+      children: [
+        Text(AppStrings.register,style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.white
+        )),
+        _buildTextField(AppStrings.name,controller: controller.nameController,),
+        _buildTextField(AppStrings.phone,controller: controller.phoneController,keyboardType: TextInputType.phone),
+        _buildTextField(AppStrings.email,controller: controller.emailController,onTap: (){},),
+        _buildTextField(AppStrings.age,controller: controller.ageController,keyboardType: TextInputType.number),
+        _buildTextField(AppStrings.gender,controller: controller.genderController),
+
+        Container(
+          padding: EdgeInsets.all(8.0),
+          width:  double.maxFinite,
+          child: ElevatedButton(onPressed: () {
+            controller.updateProfile();
+          }, child: Text(AppStrings.saveChanges),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorConstant.btnColor,
+                  foregroundColor: Colors.white
+              )),
+        ),
+      ],
+    ),
+  );
+
+  _buildTextField(String title , {TextEditingController? controller,void Function()? onTap,TextInputType? keyboardType}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -69,6 +76,7 @@ class PlayerProfileScreen extends StatelessWidget {
               readOnly: onTap!=null?true:false,
               controller: controller,
               textInputAction: TextInputAction.next,
+              keyboardType: keyboardType,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),

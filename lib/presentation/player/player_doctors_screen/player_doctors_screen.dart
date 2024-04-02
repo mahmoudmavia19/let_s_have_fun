@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 import 'package:let_s_have_fun/presentation/admin/doctors_mangement/model/doctor.dart';
 import 'package:let_s_have_fun/presentation/player/player_doctors_screen/controller/player_doctors_controller.dart';
 import '../../../core/app_export.dart';
@@ -33,15 +34,9 @@ class PlayerDoctorsScreen extends StatelessWidget {
       body: Center(
         child: Obx(
               () {
-            if (controller.doctors.isEmpty) {
-              return Text('لا توجد اخصائيين.');
-            }
-            return ListView.builder(
-              itemCount: controller.doctors.length,
-              itemBuilder: (context, index) {
-                Doctor doctor = controller.doctors[index];
-                return DoctorListItem(doctor: doctor);
-              },
+            return controller.state.value.getScreenWidget(
+              _body(),
+              () {},
             );
           },
         ),
@@ -49,6 +44,19 @@ class PlayerDoctorsScreen extends StatelessWidget {
 
     );
   }
+
+  _body()=>RefreshIndicator(
+    onRefresh: () async {
+      controller.getDoctors();
+    },
+    child: ListView.builder(
+      itemCount: controller.doctors.length,
+      itemBuilder: (context, index) {
+        Doctor doctor = controller.doctors[index];
+        return DoctorListItem(doctor: doctor);
+      },
+    ),
+  );
 }
 
 class DoctorListItem extends StatelessWidget {
@@ -74,6 +82,7 @@ class DoctorListItem extends StatelessWidget {
         ),
         leading: CircleAvatar(
           radius:30,
+          backgroundImage: NetworkImage(doctor.photo??''),
         ),
         trailing: Icon(Icons.arrow_forward_ios),
       ),
@@ -118,13 +127,15 @@ class DoctorListItem extends StatelessWidget {
                       Container(
                         height: 300,
                          child: ListView.builder(
-                           itemCount: 5,
+                           itemCount:Get.find<PlayerDoctorsController>().comments.where((p0) => p0.doctorId==doctor.uid).toList().length,
                            itemBuilder:(context, index) {
+                             var comment = Get.find<PlayerDoctorsController>().comments.where((p0) => p0.doctorId==doctor.uid).toList()[index];
                               return ListTile(
-                             title: Text('لا تقلق انت في حالة جيدة'),
+                             title: Text(comment.comment??''),
                              subtitle: Row(
                                children: [
-                                 Text(DateFormat.yMMMd('ar').format(DateTime.now())),
+                                 Text(DateFormat.yMMMd('ar').format(comment.date!)),
+/*
                                  TextButton(onPressed: (){
                                    Get.dialog(
                                      Padding(
@@ -154,6 +165,7 @@ class DoctorListItem extends StatelessWidget {
                                      )
                                    );
                                  }, child: Text('رد')) ,
+*/
                                ],
                              ),
                            );

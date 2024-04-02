@@ -1,6 +1,7 @@
 // view_play_history_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 import '../../../core/constant/constant.dart';
 import '../../../core/utils/app_strings.dart';
 import '../../../core/utils/image_constant.dart';
@@ -36,23 +37,24 @@ class ViewPlayHistoryScreen extends StatelessWidget {
         ],
       ),
       body: Obx(
-            () => ListView.builder(
-          itemCount: playHistoryController.playHistory.length,
-          itemBuilder: (context, index) {
-            var session = playHistoryController.playHistory[index];
-            return Card(
-              child: ListTile(
-                onTap: () {
-                  Get.toNamed(AppRoutes.commentsScreen, arguments: childName);
-                },
-                title: Text('${AppStrings.level}:${convertToArabicWords(session.levelNumber.toString())},${AppStrings.points}: ${session.levelPoints}'),
-                subtitle: Text('${AppStrings.regameCount}: ${session.stageNumber}, ${AppStrings.gameTime}: ${formatDuration(session.playingTime,Get.locale!.languageCode)}'),
-                trailing: Icon(Icons.comment_bank_outlined),
-              ),
-            );
-          },
-        ),
+            () => playHistoryController.state.value.getScreenWidget(_body(),(){}),
       ),
     );
   }
+  _body()=>ListView.builder(
+    itemCount: playHistoryController.playHistory.length,
+    itemBuilder: (context, index) {
+      var session = playHistoryController.playHistory[index];
+      return Card(
+        child: ListTile(
+          onTap: () {
+            Get.toNamed(AppRoutes.commentsScreen, arguments: playHistoryController.player);
+          },
+          title: Text('${AppStrings.level}:${convertToArabicWords(session.levelNumber.toString())},${AppStrings.points}: ${session.levelPoints}'),
+          subtitle: Text('${AppStrings.regameCount}: ${session.stageNumber}, ${AppStrings.gameTime}: ${formatDuration(session.playingTime!,Get.locale!.languageCode)}'),
+          trailing: Icon(Icons.comment_bank_outlined),
+        ),
+      );
+    },
+  );
 }

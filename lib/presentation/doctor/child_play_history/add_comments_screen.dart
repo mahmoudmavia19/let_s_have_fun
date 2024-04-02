@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 
 import '../../../core/utils/app_strings.dart';
 import '../../../core/utils/image_constant.dart';
@@ -36,33 +37,34 @@ class AddCommentsScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${AppStrings.enterComments}:',
-              style: TextStyle(fontSize: 16.0),
-            ),
-            SizedBox(height: 10.0),
-            TextField(
-              controller: commentsController.commentsController,
-              maxLines: 4,
-              decoration: InputDecoration(
-                hintText: AppStrings.enterCommentsHint,
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-              //  commentsController.saveComments(childName);
-               Get.back();
-              },
-              child: Text(AppStrings.saveComments),
-            ),
-          ],
-        ),
+        child: Obx(()=>commentsController.state.value.getScreenWidget(_body(), (){})),
       ),
     );
   }
+
+  _body()=> Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        '${AppStrings.enterComments}:',
+        style: TextStyle(fontSize: 16.0),
+      ),
+      SizedBox(height: 10.0),
+      TextField(
+        controller: commentsController.commentsController,
+        maxLines: 4,
+        decoration: InputDecoration(
+          hintText: AppStrings.enterCommentsHint,
+          border: OutlineInputBorder(),
+        ),
+      ),
+      SizedBox(height: 20.0),
+      ElevatedButton(
+        onPressed: () {
+          commentsController.sendComment();
+        },
+        child: Text(AppStrings.saveComments),
+      ),
+    ],
+  );
 }
