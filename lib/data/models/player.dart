@@ -13,6 +13,7 @@ class Player {
   int? regameCount;
   Duration? gameTime;
   String? image;
+  String? doctorID;
   bool isBlocked ;
 
   Player({
@@ -28,6 +29,7 @@ class Player {
     this.gameTime,
     this.image,
     this.gender,
+    this.doctorID,
     this.isBlocked = false
   });
 
@@ -46,6 +48,7 @@ class Player {
       'regameCount': regameCount,
       'gameTime': gameTime?.inSeconds??0, // Convert Duration to seconds
       'image': image,
+      'doctorID': doctorID,
       'isBlocked': isBlocked
     };
   }
@@ -65,6 +68,7 @@ class Player {
       gameTime: Duration(seconds: json['gameTime']??0),
       image: json['image'],
       id: json['id'],
+      doctorID: json['doctorID'],
       isBlocked: json['isBlocked'] ?? false
     );
   }

@@ -12,6 +12,7 @@ class ChildController extends GetxController {
 
   DoctorRemoteDataSource remoteDataSource = Get.find<DoctorRemoteDataSourceImpl>();
   Rx<FlowState> state = Rx<FlowState>(LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState));
+  Rx<FlowState> addState = Rx<FlowState>(ContentState());
 
 
   getAllChildren() async {
@@ -30,9 +31,9 @@ class ChildController extends GetxController {
   }
 
   addPlayer(Player player,String password)async{
-    state.value = LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState, message: AppStrings.loading);
+    addState.value = LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState, message: AppStrings.loading);
     (await remoteDataSource.addPlayer(player,password)).fold((l) {
-      state.value = ErrorState(StateRendererType.popupErrorState,l.message);
+      addState.value = ErrorState(StateRendererType.popupErrorState,l.message);
     }, (r) async{
       await getAllChildren();
       Get.back();

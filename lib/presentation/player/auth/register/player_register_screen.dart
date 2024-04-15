@@ -5,7 +5,6 @@ import 'package:let_s_have_fun/core/utils/app_strings.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
 import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
 import 'package:let_s_have_fun/presentation/player/auth/register/controller/player_register_controller.dart';
-import 'package:let_s_have_fun/widgets/auth_background.dart';
 
 class PlayerRegisterScreen extends GetWidget<PlayerRegisterController> {
 
@@ -52,7 +51,7 @@ class PlayerRegisterScreen extends GetWidget<PlayerRegisterController> {
         _buildTextField(AppStrings.phone,controller: controller.phoneController),
         _buildTextField(AppStrings.email,controller: controller.emailController),
         _buildTextField(AppStrings.age,controller: controller.ageController),
-        _buildDrawDownField(AppStrings.gender,<String>['زكر','انثة'],controller: controller.genderController),
+        _buildDrawDownField(AppStrings.gender,<String>['ذكر','انثى'],controller: controller.genderController),
         _buildDrawDownField(AppStrings.userType,<String>[AppStrings.player,AppStrings.theDoctor],controller: controller.userTypeController),
         Obx(() =>Visibility(
             child:  _buildTextField(AppStrings.certificate,onTap: () async{

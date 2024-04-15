@@ -7,10 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:let_s_have_fun/data/models/commnet.dart';
 import 'package:let_s_have_fun/data/models/play_game.dart';
 import 'package:let_s_have_fun/data/models/player.dart';
-import 'package:let_s_have_fun/data/requests/doctor_request.dart';
-import 'package:let_s_have_fun/presentation/doctor/child_play_history/add_comments_screen.dart';
-import 'package:let_s_have_fun/presentation/player/player_records/player_records_screen.dart';
-
 import '../../presentation/admin/doctors_mangement/model/doctor.dart';
 import '../../presentation/doctor/child_play_history/model/play_history.dart';
 import '../../presentation/doctor/exercies_management/model/Exercise.dart';
@@ -59,7 +55,9 @@ class DoctorApiClient {
     await firebaseFirestore.collection('doctors').doc(doctorId).update(doctor.toJson());
   }
   Future<List<Player>> getPlayers() async {
-    var response = await firebaseFirestore.collection('players').get();
+    var response = await firebaseFirestore.collection('players')
+        .where('doctorID',isEqualTo: doctorId)
+        .get();
     return response.docs.map((e) => Player.fromJson(e.data())).toList();
   }
   Future<Exercise> addExercies(Exercise exercise) async{
@@ -129,12 +127,15 @@ class DoctorApiClient {
   addPlayer(Player player,String password) async{
     var response =  await firebaseAuth.createUserWithEmailAndPassword(email: player.email!, password:password);
     player.id = response.user?.uid;
+    player.doctorID = doctorId;
     await firebaseFirestore.collection('Roles').doc(response.user!.uid).set(Role('Player',player.isBlocked).toJson());
     await firebaseFirestore.collection('players').doc(response.user?.uid).set(player.toJson());
   }
 
   Future<List<PlayHistory>> getPlayerRecords(String userId) async {
-    var response = await firebaseFirestore.collection('players').doc(userId).collection('records').get();
+    var response = await firebaseFirestore.collection('players').doc(userId).collection('records')
+    .where('doctorID',isEqualTo: doctorId)
+        .get();
     return response.docs.map((e) {
       PlayGame playGame = PlayGame.fromJson(e.data());
       return PlayHistory(

@@ -35,7 +35,7 @@ class AddChildScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Obx(()=>controller.state.value.getScreenWidget(_body(), (){})),
+        child: Obx(()=>controller.addState.value.getScreenWidget(_body(), (){})),
       ),
     );
   }
@@ -43,16 +43,7 @@ _body()=>Form(
   key: formKey,
   child: Column(
     children: [
-      Stack(
-        alignment: Alignment.bottomRight,
-        children: [
-          CircleAvatar(radius: 60.0,),
-          CircleAvatar(
-              backgroundColor:Colors.white,
-              foregroundColor: ColorConstant.primary,
-              child: Icon(Icons.edit,))
-        ],
-      ),
+      SizedBox(height: 50.0,),
       _buildTextField(AppStrings.name, (value) => user.name = value),
       _buildTextField(AppStrings.email, (value) => user.email = value,keyboardType: TextInputType.emailAddress),
       _buildTextField(AppStrings.phone, (value) => user.phone = value,keyboardType: TextInputType.phone),
