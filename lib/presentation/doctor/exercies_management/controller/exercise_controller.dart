@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/utils/app_strings.dart';
 import 'package:let_s_have_fun/core/utils/color_constant.dart';
 import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer.dart';
-import 'package:let_s_have_fun/data/remote_data_source/admin_remote_data_source.dart';
 import 'package:let_s_have_fun/data/remote_data_source/doctor_remote_data_source.dart';
-
 import '../../../../core/app_export.dart';
 import '../../../../core/constant/constant.dart';
 import '../../../../core/utils/state_renderer/state_renderer_impl.dart';
@@ -162,6 +160,7 @@ class ExerciseController extends GetxController {
                 if (p0!.isEmpty) {
                   return AppStrings.title;
                 }
+                return null;
               },
             ),
             TextFormField(
@@ -172,6 +171,7 @@ class ExerciseController extends GetxController {
                   if (p0!.isEmpty) {
                     return AppStrings.levelScore;
                   }
+                  return null;
                 }),
           ]),
         ),
@@ -213,6 +213,7 @@ class ExerciseController extends GetxController {
                 if (p0!.isEmpty) {
                   return AppStrings.title;
                 }
+                return null;
               },
             ),
             TextFormField(
@@ -223,6 +224,7 @@ class ExerciseController extends GetxController {
                   if (p0!.isEmpty) {
                     return AppStrings.levelScore;
                   }
+                  return null;
                 }),
           ]),
         ),

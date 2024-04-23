@@ -105,6 +105,7 @@ class PlayerRegisterScreen extends GetWidget<PlayerRegisterController> {
              clipBehavior: Clip.antiAliasWithSaveLayer,
             child: TextFormField(
               onTap: onTap,
+              obscureText: title.toLowerCase().contains('المرور'),
               readOnly: onTap!=null?true:false,
               controller: controller,
              textInputAction: TextInputAction.next,

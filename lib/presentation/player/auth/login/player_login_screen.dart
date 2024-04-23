@@ -82,6 +82,7 @@ class PlayerLoginScreen extends GetWidget<PlayerLoginController> {
              ),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: TextFormField(
+              obscureText: title.toLowerCase().contains('المرور'),
               controller: controller,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
