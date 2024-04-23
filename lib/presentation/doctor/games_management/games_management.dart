@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:let_s_have_fun/core/constant/constant.dart';
 import 'package:let_s_have_fun/core/utils/state_renderer/state_renderer_impl.dart';
@@ -66,9 +67,31 @@ class GamesManagement extends GetWidget<GameController> {
               )
           ],
          bottom: Tab(
-           child:Visibility(
-               visible: controller.currentLevel.value != null,
-                 child: Text(controller.currentLevel.value?.title??''),
+           child:Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+               Expanded(
+                 child: Center(
+                   child: Visibility(
+                       visible: controller.currentLevel.value != null,
+                         child: Text(controller.currentLevel.value?.title??''),
+                   ),
+                 ),
+               ),
+               IconButton(
+                 onPressed: () {
+                   Get.defaultDialog(
+                     title: AppStrings.clearAll,
+                     content: Text(AppStrings.clearAllMessage),
+                     onConfirm: (){
+                       controller.cleanAll();
+                       Get.back();
+                     }
+                   );
+                 },
+                 icon: Icon(Icons.clear_all),
+               )
+             ],
            ),
          ),
         ),
@@ -119,7 +142,17 @@ class GamesManagement extends GetWidget<GameController> {
             controller: controller.imgController,
             decoration: InputDecoration(
                 label:RequiredText( AppStrings.imgUrl),
-                suffixIcon: Icon(Icons.upload)
+                suffixIcon: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.upload),
+                    SizedBox(width: 4.0),
+                    IconButton(onPressed: (){
+                      controller.imgController.clear();
+                      controller.currentLevel.value?.games?.first.img = null;
+                    }, icon: Icon(Icons.clear))
+                  ],
+                )
             ),
           ),
           SizedBox(height: 16.0),
@@ -153,9 +186,9 @@ class GamesManagement extends GetWidget<GameController> {
                       Icon(Icons.cloud_upload),
                       IconButton(onPressed: (){
                         controller.imgsAnswerControllers[i].clear();
-                        controller.isImgSelected[i].value = false ;
-                        controller. currentLevel.value?.games?.first.imgsAnswer[i].isSelected =false;
-                        controller. currentLevel.value?.games?.first.imgsAnswer[i].url = null;
+                        controller.isImgSelected[i].value =false;
+                        controller.currentLevel.value?.games?.first.imgsAnswer[i].isSelected =false;
+                        controller.currentLevel.value?.games?.first.imgsAnswer[i].url = null;
                       }, icon: Icon(Icons.clear))
                     ],
                   ),

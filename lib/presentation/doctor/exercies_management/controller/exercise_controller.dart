@@ -197,6 +197,58 @@ class ExerciseController extends GetxController {
           )
         ]);
   }
+  Future<void> showUpdateLevelDialog(int  index,Exercise exercise) async {
+    TextEditingController levelController = TextEditingController(text: exercise.levels?[index].title??'');
+    TextEditingController levelScoreController = TextEditingController(text: exercise.levels?[index].levelScore.toString()??'');
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    return Get.defaultDialog(
+        title: AppStrings.updatelevel,
+        content: Form(
+          key: formKey,
+          child: Column(children: [
+            TextFormField(
+              controller: levelController,
+              decoration: InputDecoration(labelText: AppStrings.title),
+              validator: (p0) {
+                if (p0!.isEmpty) {
+                  return AppStrings.title;
+                }
+              },
+            ),
+            TextFormField(
+                controller: levelScoreController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: AppStrings.levelScore),
+                validator: (p0) {
+                  if (p0!.isEmpty) {
+                    return AppStrings.levelScore;
+                  }
+                }),
+          ]),
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                Get.back();
+                _updateLevel(
+                    levelController.text,
+                    levelScoreController.text,
+                    index,
+                    exercise
+                );
+              }
+            },
+            child: Text(AppStrings.update),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text(AppStrings.cancel),
+          )
+        ]);
+  }
 
   Future<void> _addExercise(String text, Color? value) async {
     state.value =
@@ -227,6 +279,19 @@ class ExerciseController extends GetxController {
 
     });
   }
+  Future<void> _updateLevel(String text, String text2,index,Exercise exercise) async {
+    state.value = LoadingState(stateRendererType: StateRendererType.popupLoadingState);
+    exercise.levels![index] = Level(
+        id:exercise.levels![index].id,
+        title: text,
+        levelNumber:exercise.levels![index].levelNumber,
+        exerciseId: exercise.uid!,
+        levelScore: int.parse(text2));
+    (await remoteDataSource.updateLevels(exercise)).fold((l){
+      state.value = ErrorState(StateRendererType.popupErrorState, l.message);
+    }, (r){
+      state.value = SuccessState(StateRendererType.popupSuccessState, AppStrings.successAdded,);
 
-
-}
+    });
+  }
+ }

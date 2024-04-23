@@ -56,6 +56,21 @@ class GameController extends GetxController {
     state.value = ContentState();
   }
 
+  cleanAll(){
+    imgController.clear();
+    currentLevel.value?.games?.first.img = null;
+    questionController.clear();
+    successMessageController.clear();
+    for (var i = 0; i < imgsAnswerControllers.length; i++) {
+      imgsAnswerControllers[i].clear();
+      isImgSelected[i].value =false;
+      currentLevel.value?.games?.first.imgsAnswer[i].isSelected =false;
+      currentLevel.value?.games?.first.imgsAnswer[i].url = null;
+    }
+
+  }
+
+
   void checkImgSelected(int index) {
     int selectedCount = isImgSelected.where((rxBool) => rxBool.value).length;
 

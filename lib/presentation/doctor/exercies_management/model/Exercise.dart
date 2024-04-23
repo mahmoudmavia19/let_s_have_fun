@@ -9,6 +9,7 @@ class Exercise {
   late String title;
   List<Level>? levels;
   Color? color;
+  String? doctorId;
 
   Exercise({
     this.id = 0,
@@ -16,6 +17,7 @@ class Exercise {
     required this.title,
     this.levels =const[],
     this.color = ColorConstant.primary,
+    this.doctorId
   });
 
    Exercise.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class Exercise {
     title = json['title'];
     levels = (json['levels']as List?)?.map((e) => Level.fromJson(e)).toList();
     color= Color(json['color']);
+    doctorId = json['doctorId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +34,7 @@ class Exercise {
     data['title'] = title;
     data['levels'] = levels;
     data['color'] = color?.value;
+    data['doctorId'] = doctorId;
     return data;
   }
 

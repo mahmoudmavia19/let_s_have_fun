@@ -8,6 +8,10 @@ class AppStrings {
    static String noData = "لا يوجد بيانات".tr;
    static String profile = "الملف الشخصي".tr;
    static String addlevel = "اضافة مستوى".tr;
+   static String updatelevel = "تحديث المستوى".tr;
+   static String update = "تحديث".tr;
+   static String clearAll = "مسح الكل".tr;
+   static String clearAllMessage = "هل تريد مسح جميع التمارين؟".tr;
    static String passwordNotValid = "كلمة المرور غير صحيحة".tr;
   static String title = "العنوان".tr;
   static String unblockUser = "الغاء حظر المستخدم".tr;

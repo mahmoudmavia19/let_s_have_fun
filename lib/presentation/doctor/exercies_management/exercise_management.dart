@@ -99,19 +99,32 @@ class ExerciseScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      trailing: IconButton(
-                          onPressed: () {
-                            showConfirmDialog(
-                                AppStrings.delete, AppStrings.deleteLevel, () {
-                              exerciseController.deleteLevel(
-                                  exerciseController.exercises[index],
-                                  exerciseController.exercises[index].levels![i].id);
-                            });
-                          },
-                          icon: Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          )),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                exerciseController.showUpdateLevelDialog(i,exerciseController.exercises[index]);
+                              },
+                              icon: Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                              )),
+                          IconButton(
+                              onPressed: () {
+                                showConfirmDialog(
+                                    AppStrings.delete, AppStrings.deleteLevel, () {
+                                  exerciseController.deleteLevel(
+                                      exerciseController.exercises[index],
+                                      exerciseController.exercises[index].levels![i].id);
+                                });
+                              },
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              )),
+                        ],
+                      ),
                     )
                 ]),
           );

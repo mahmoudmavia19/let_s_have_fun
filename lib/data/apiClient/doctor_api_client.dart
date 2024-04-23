@@ -63,6 +63,7 @@ class DoctorApiClient {
   Future<Exercise> addExercies(Exercise exercise) async{
     var response =  await firebaseFirestore.collection('exercies').add(exercise.toJson());
     exercise.uid = response.id;
+    exercise.doctorId= doctorId;
     await firebaseFirestore.collection('exercies').doc(response.id).update(exercise.toJson());
     return exercise;
   }
@@ -71,7 +72,7 @@ class DoctorApiClient {
   }
 
   Future<List<Exercise>> getExercies() async{
-    var response = await firebaseFirestore.collection('exercies').get();
+    var response = await firebaseFirestore.collection('exercies').where('doctorId',isEqualTo: doctorId).get();
     return response.docs.map((e) => Exercise.fromJson(e.data())).toList();
   }
 

@@ -41,8 +41,18 @@ class PlayerApiClient {
    }
 
    Future<List<Exercise>> getExercies() async{
-     var response = await firebaseFirestore.collection('exercies').get();
-     return response.docs.map((e) => Exercise.fromJson(e.data())).toList();
+     List<Exercise> exerciseList = [];
+     // get all exercies of the doctor of the player
+    var doctors = await getDoctorsList();
+
+    for(var doctor in doctors){
+      var response = await firebaseFirestore.collection('exercies').
+         where('doctorId',isEqualTo: doctor.uid).get();
+      exerciseList.addAll(response.docs.map((e) => Exercise.fromJson(e.data())).toList());
+    }
+    return exerciseList;
+     /*var response = await firebaseFirestore.collection('exercies').get();
+     return response.docs.map((e) => Exercise.fromJson(e.data())).toList();*/
    }
 
    Future<Player> getProfile() async {
@@ -53,9 +63,11 @@ class PlayerApiClient {
    Future<void> updateProfile(Player player)async {
      await firebaseFirestore.collection('players').doc(firebaseAuth.currentUser?.uid).update(player.toJson());
    }
-   Future<List<Doctor>> getDoctorsList() {
-     return firebaseFirestore.collection('doctors')
-         .where('accepted', isEqualTo: true)
+   Future<List<Doctor>> getDoctorsList() async{
+     var user = await getProfile();
+     print(user.doctorID);
+     /*return firebaseFirestore.collection('doctors')
+     .where('uid',isEqualTo: user.doctorID)
          .get().then((querySnapshot) {
        List<Doctor> doctorsList = querySnapshot.docs.map((doc) {
          Map<String, dynamic> data = doc.data();
@@ -66,8 +78,18 @@ class PlayerApiClient {
 
        return doctorsList;
      }).catchError((e) {
+       print(e);
        return <Doctor>[];
-     });
+     });*/
+     try {
+       return [
+         Doctor.fromJson((await firebaseFirestore.collection('doctors').doc(user.doctorID).get()).data()!)
+       ];
+     } catch (e) {
+       print(e);
+       return [];
+     }
+
    }
 
    Future<void> playGame(PlayGame play)async {
